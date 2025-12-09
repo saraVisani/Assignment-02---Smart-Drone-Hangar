@@ -25,13 +25,24 @@ void CheckInsideTemperature::checkTemperature() {
     //check if temp wasn't okay for which interval
     if (elapsed >= ALARM_TIME) {
         State::setSystemState(ALARM);
+        lcdDisplay.activateClearFlag();
     }
     else if (elapsed >= PREALARM_TIME) {
         State::setSystemState(PREALARM);
     }
 }
 
-void alarmProtocol(){
+void CheckInsideTemperature::checkForReset() {
+    if(buttonReset.isPressed()){
+        State::setSystemState(OK);
+        lastTempCheckTime = 0;
+        ledAlarm.turnOff();
+        lcdDisplay.activateClearFlag();
+        lcdDisplay.clear();
+    }
+}
+
+void CheckInsideTemperature::alarmProtocol(){
     Hardware::closeDoor();
     ledAlarm.turnOn();
     lcdDisplay.clear();
@@ -44,5 +55,6 @@ void CheckInsideTemperature::tick()
         checkTemperature();
     } else {
         alarmProtocol();
+        checkForReset();
     }
 }

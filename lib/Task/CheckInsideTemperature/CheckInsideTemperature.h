@@ -8,6 +8,7 @@ class CheckInsideTemperature: public Task {
         unsigned long lastTempCheckTime;
         void checkTemperature();
         void alarmProtocol();
+        void checkForReset();
     public:
         inline TaskType getType() override {
             return T_CHECK_INSIDE_TEMPERATURE;
