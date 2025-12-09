@@ -8,6 +8,9 @@ void setup() {
   Task* ioTask = new InputOutput();
   ioTask->init(20);
   scheduler.addTask(ioTask);
+  Task* tempTask = new CheckInsideTemperature();
+  tempTask->init(50);
+  scheduler.addTask(tempTask);
 }
 
 void loop() {
