@@ -1,7 +1,7 @@
 #ifndef __TASK__
 #define __TASK__
 
-#include "Globals.h"
+#include "Hardware.h"
 
 class Task
 {

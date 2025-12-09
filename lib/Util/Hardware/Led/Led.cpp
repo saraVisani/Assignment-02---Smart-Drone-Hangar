@@ -12,13 +12,17 @@ bool Led::isOn() {
 }
 
 void Led::turnOn() {
-    digitalWrite(pin, LOW);
-    this->stateOn = false;
+    if(!isOn){
+        digitalWrite(pin, HIGH);
+        this->stateOn = true;
+    }
 }
 
 void Led::turnOff() {
-    digitalWrite(pin, HIGH);
-    this->stateOn = true;
+    if(isOn){
+        digitalWrite(pin, LOW);
+        this->stateOn = false;
+    }
 }
 
 void Led::toggle() {
