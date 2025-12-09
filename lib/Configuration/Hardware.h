@@ -8,6 +8,7 @@
 #include "./Hardware/S_Pir/Spir.h"
 #include "./Hardware/S_DDD/Sddd.h"
 #include "./Hardware/S_Temp/Stemp.h"
+#include "./Hardware/Servo Motor/ServoMotor.h"
 #include "Globals.h"
 
 extern Led ledOn;
@@ -18,10 +19,14 @@ extern Spir sensorPir;
 extern Sddd sensorDdd;
 extern Stemp sensorTemp;
 extern Lcd lcdDisplay;
+extern ServoMotor servoMotor;
 
 class Hardware {
 public:
     static void initAllHardware();
+    static void openDoor();
+    static void closeDoor();
+    static void setDoorPosition(int angle);
 };
 
 #endif

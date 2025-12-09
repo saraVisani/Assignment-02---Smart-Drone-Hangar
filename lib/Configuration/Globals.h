@@ -69,7 +69,8 @@ typedef enum {
     LCD,
     S_DDD,
     S_PIR,
-    S_TEMP
+    S_TEMP,
+    SERVO_MOTOR
 } HardwareType;
 
 static inline bool matchHardwareType(HardwareType t1, HardwareType t2) {
