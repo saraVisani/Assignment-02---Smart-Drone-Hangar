@@ -1,0 +1,25 @@
+#ifndef __SCHEDULER__
+#define __SCHEDULER__
+
+#include "Timer.h"
+#include "Task.h"
+#include "Globals.h"
+
+#define MAX_TASKS 10
+
+class Scheduler
+{
+    private:
+        int basePeriod;
+        int nTasks;
+        Task *taskList[MAX_TASKS];
+        Timer timer;
+        bool isSkipped(TaskType type);
+
+    public:
+        void init(int basePeriod);
+        virtual bool addTask(Task *task);
+        virtual void schedule();
+};
+
+#endif
