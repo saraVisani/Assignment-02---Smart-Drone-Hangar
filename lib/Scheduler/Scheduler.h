@@ -7,14 +7,14 @@
 
 #define MAX_TASKS 10
 
-class Scheduler
-{
+class Scheduler {
     private:
         int basePeriod;
         int nTasks;
         Task *taskList[MAX_TASKS];
         Timer timer;
         bool isSkipped(TaskType type);
+        bool activateTempTask(TaskType type);
 
     public:
         void init(int basePeriod);

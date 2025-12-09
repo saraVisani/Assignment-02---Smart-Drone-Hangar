@@ -1,5 +1,5 @@
 #include "CheckInsideTemperature.h"
 
-void CheckInsideTemperature::tick()
-{
+void CheckInsideTemperature::tick() {
+    
 }
