@@ -42,3 +42,13 @@ void Hardware::setDoorPosition(int angle) {
     }
     servoMotor.setPosition(angle);
 }
+
+void Hardware::updateClosingDoor()
+{
+    if(servoMotor.isClosing()) servoMotor.update();
+}
+
+void Hardware::updateOpeningDoor()
+{
+    if(servoMotor.isOpening()) servoMotor.update();
+}

@@ -4,13 +4,14 @@
 #include "Arduino.h"
 
 /* ---- PINS FOR HARDWARE ---- */
-#define     L_ON        2//pin
-#define     L_ACT       3//pin
-#define     L_ALARM     4//pin
-#define     B_RESET     5//pin
-#define     P_S_PIR     6//pin
-#define     P_S_DDD     7//pin
-#define     P_S_TEMP    8//pin
+#define     L_ON            2//pin
+#define     L_ACT           3//pin
+#define     L_ALARM         4//pin
+#define     B_RESET         5//pin
+#define     P_S_PIR         6//pin
+#define     P_S_DDD         7//pin
+#define     P_S_TEMP        8//pin
+#define     P_SERVOMOTOR    9//pin
 
 /* ---- GLOBAL CONSTANT VARIABLE ---- */
 static const int    TAKEOFF_DISTANCE   =      100; //da aggiustare

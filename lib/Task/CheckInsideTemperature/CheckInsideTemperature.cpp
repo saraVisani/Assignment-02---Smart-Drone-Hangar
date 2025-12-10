@@ -26,6 +26,7 @@ void CheckInsideTemperature::checkTemperature() {
     if (elapsed >= ALARM_TIME) {
         State::setSystemState(ALARM);
         lcdDisplay.activateClearFlag();
+        Hardware::closeDoor();
     }
     else if (elapsed >= PREALARM_TIME) {
         State::setSystemState(PREALARM);
@@ -44,6 +45,7 @@ void CheckInsideTemperature::checkForReset() {
 
 void CheckInsideTemperature::alarmProtocol(){
     Hardware::closeDoor();
+    Hardware::updateClosingDoor();
     ledAlarm.turnOn();
     lcdDisplay.clear();
     lcdDisplay.print("ALARM TEMP", "TOO HIGH");

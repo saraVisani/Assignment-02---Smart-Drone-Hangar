@@ -27,6 +27,8 @@ public:
     static void openDoor();
     static void closeDoor();
     static void setDoorPosition(int angle);
+    static void updateClosingDoor();
+    static void updateOpeningDoor();
 };
 
 #endif
