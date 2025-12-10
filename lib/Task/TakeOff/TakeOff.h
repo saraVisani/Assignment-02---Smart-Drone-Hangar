@@ -7,7 +7,7 @@ class TakeOff: public Task{
     public:
     void tick() override;
     inline TaskType getType() override;
-}
+};
 
 
 #endif

@@ -7,6 +7,6 @@ class Landing: public Task{
     public:
     void tick() override;
     inline TaskType getType() override;
-}
+};
 
 #endif

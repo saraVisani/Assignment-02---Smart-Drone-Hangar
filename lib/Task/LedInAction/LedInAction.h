@@ -16,5 +16,5 @@ class LedInAction: public Task{
     void blinking();
     void tick() override;
     inline TaskType getType() override;
-}
+};
 #endif
