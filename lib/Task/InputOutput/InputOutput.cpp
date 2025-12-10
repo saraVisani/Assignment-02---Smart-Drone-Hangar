@@ -11,9 +11,9 @@ void InputOutput::read() {
 
         // Decode and process the incoming message
         if(isHangarAvailable()) {
-            if(strcasecmp(incoming.c_str(), "take off") == 0){
+            if(strcasecmp(incoming.c_str(), "take off") == 0 && State::matchDroneState(IDLE)){
                 State::setDroneState(TAKEOFF);
-            } else if (strcasecmp(incoming.c_str(), "landing") == 0){
+            } else if (strcasecmp(incoming.c_str(), "landing") == 0 && State::matchDroneState(OPERATING)){
                 State::setDroneState(LANDING);
             }
         } else {

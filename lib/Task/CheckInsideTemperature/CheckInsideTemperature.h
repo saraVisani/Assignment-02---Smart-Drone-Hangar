@@ -16,7 +16,7 @@ class CheckInsideTemperature: public Task {
         void tick() override;
         void init(int period) override {
             Task::init(period);
-            lastTempCheckTime = millis();
+            lastTempCheckTime = 0;
         }
 };
 
