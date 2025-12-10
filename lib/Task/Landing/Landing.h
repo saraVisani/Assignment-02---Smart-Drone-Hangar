@@ -9,3 +9,4 @@ class Landing: public Task{
     inline TaskType getType() override;
 }
 
+#endif
