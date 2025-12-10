@@ -11,6 +11,15 @@ void setup() {
   Task* tempTask = new CheckInsideTemperature();
   tempTask->init(50);
   scheduler.addTask(tempTask);
+  Task* takeOffTask = new TakeOff();
+  takeOffTask->init(40);
+  scheduler.addTask(takeOffTask);
+  Task* landing = new Landing();
+  landing->init(40);
+  scheduler.addTask(landing);
+  Task* ledTask = new LedInAction();
+  ledTask->init(40);
+  scheduler.addTask(ledTask);
 }
 
 void loop() {
