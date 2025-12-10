@@ -13,8 +13,11 @@ class Scheduler {
         int nTasks;
         Task *taskList[MAX_TASKS];
         Timer timer;
+        bool activateTaskLed;
         bool isSkipped(TaskType type);
         bool activateTempTask(TaskType type);
+        bool activateTaskMovement(TaskType type);
+        bool activateLed(TaskType type);
 
     public:
         void init(int basePeriod);

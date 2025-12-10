@@ -1,7 +1,7 @@
 #include "Scheduler.h"
 
 bool Scheduler::isSkipped(TaskType type) {
-    return  ((matchTaskType(type, T_TAKEOFF) || matchTaskType(type, T_LANDING)) &&
+    return  ((matchTaskType(type, T_TAKEOFF) || matchTaskType(type, T_LANDING) || matchTaskType(type, T_LEDINACTION)) &&
             (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING)) &&
             State::isNotSystemState(OK));
 }
@@ -11,10 +11,46 @@ bool Scheduler::activateTempTask(TaskType type) {
     return !isTempTask || State::isNotDroneState(OPERATING);
 }
 
+bool Scheduler::activateTaskMovement(TaskType type)
+{
+    if(isNotTaskType(type, T_TAKEOFF) && isNotTaskType(type, T_LANDING)){
+        return true;
+    }
+
+    // Drone in TAKEOFF → attiva solo la task T_TAKEOFF
+    if (State::matchDroneState(TAKEOFF) && matchTaskType(type, T_TAKEOFF)) {
+        activateTaskLed = true;
+        return true;
+    }
+
+    // Drone in LANDING → attiva solo la task T_LANDING
+    if (State::matchDroneState(LANDING) && matchTaskType(type, T_LANDING)) {
+        activateTaskLed = true;
+        return true;
+    }
+
+    return false;
+}
+
+bool Scheduler::activateLed(TaskType type)
+{
+    if(isNotTaskType(type, T_LEDINACTION)){
+        return true;
+    }
+
+    if(activateLed){
+        activateTaskLed = false;
+        return true;
+    }
+
+    return false;
+}
+
 void Scheduler::init(int basePeriod) {
     this->basePeriod = basePeriod;
     timer.setupPeriod(basePeriod);
     nTasks = 0;
+    activateTaskLed = false;
 }
 
 bool Scheduler::addTask(Task *task) {
@@ -36,7 +72,9 @@ void Scheduler::schedule() {
     {
         if (    !isSkipped(taskList[i]->getType())
                 && taskList[i]->updateAndCheckTime(basePeriod)
-                && activateTempTask(taskList[i]->getType())     ) {
+                && activateTempTask(taskList[i]->getType())
+                && activateTaskMovement(taskList[i]->getType())
+                && activateLed(taskList[i]->getType())     ) {
             taskList[i]->tick();
         }
     }
