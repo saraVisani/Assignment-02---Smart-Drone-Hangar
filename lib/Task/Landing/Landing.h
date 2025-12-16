@@ -14,7 +14,7 @@ class Landing: public Task{
     LandingState state;
     bool openHangarDoor;
     void landing();
-    void monitroDroneLanding();
+    void monitorDroneLanding();
     void completeLanding();
 
     public:
