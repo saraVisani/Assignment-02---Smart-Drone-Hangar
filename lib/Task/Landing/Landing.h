@@ -7,7 +7,6 @@ enum class LandingState {
     WAIT_COMMAND,
     LANDING,
     WAIT_DRONE_LAND,
-    DRONE_INSIDE
 };
 
 class Landing: public Task{

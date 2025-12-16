@@ -2,17 +2,8 @@
 
 Landing::Landing()
     : droneLandStartTime(0),
-      state(LandingState::WAIT_COMMAND), 
       openHangarDoor(false) 
 {}
-
-//va chiamato quando arriva il comando dal dru
-void Landing::receiveCommand()
-{
-    if(state == LandingState::WAIT_COMMAND){
-        state = LandingState::LANDING;
-    }
-}
 
 void Landing::landing()
 {
@@ -57,8 +48,6 @@ void Landing::tick()
 {
     servoMotor.update();
     switch (state) {
-        case LandingState::WAIT_COMMAND:
-            break;
         case LandingState::LANDING:
             landing();
             break;

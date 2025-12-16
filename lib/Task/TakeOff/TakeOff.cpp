@@ -2,17 +2,9 @@
 
 TakeOff::TakeOff()
     : droneExitStartTime(0), 
-      state(TakeOffState::WAIT_COMMAND), 
+      state(TakeOffState::TAKING_OFF), 
       openHangarDoor(false) 
 {}
-
-//va chiamato quando arriva il comando dal dru
-void TakeOff::receiveCommand()
-{
-    if(state == TakeOffState::WAIT_COMMAND){
-        state = TakeOffState::TAKING_OFF;
-    }
-}
 
 void TakeOff::takingOff()
 {

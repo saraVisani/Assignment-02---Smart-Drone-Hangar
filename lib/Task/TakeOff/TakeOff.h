@@ -4,10 +4,8 @@
 #include "Task.h"
 
 enum class TakeOffState {
-    WAIT_COMMAND,
     TAKING_OFF,
     WAIT_DRONE_EXIT,
-    DRONE_OUT
 };
 
 class TakeOff: public Task{
