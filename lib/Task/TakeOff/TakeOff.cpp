@@ -1,28 +1,72 @@
 #include "TakeOff.h"
 
-void TakeOff::takingOff()
+TakeOff::TakeOff()
+    : droneExitStartTime(0), 
+      state(TakeOffState::WAIT_COMMAND), 
+      openHangarDoor(false) 
+{}
+
+//va chiamato quando arriva il comando dal dru
+void TakeOff::receiveCommand()
 {
-    servoMotor.open();
-    Hardware::updateOpeningDoor()
-    lcdDisplay.activateClearFlag();
-    lcdDisplay.printLine("TAKE OFF");
+    if(state == TakeOffState::WAIT_COMMAND){
+        state = TakeOffState::TAKING_OFF;
+    }
 }
 
-
-when the measured distance is greater than D1 for more than T1 seconds,
-it is assumed that the drone has exited, and the HD door is closed. The LCD then displays DRONE OUT.
-
-void TakeOff::droneHasLeft()
+void TakeOff::takingOff()
 {
-    if(/*misura distanza*/ >= D1 )
+    if(!openHangarDoor){
+        servoMotor.open();
+        Hardware::updateOpeningDoor();
+        lcdDisplay.activateClearFlag();
+        lcdDisplay.printLine("TAKE OFF");
+        openHangarDoor = true;
+        state = TakeOffState::DRONE_OUT;
+    }
+}
+
+void TakeOff::monitorDroneExit()
+{
+    if(state != TakeOffState::WAIT_DRONE_EXIT || !openHangarDoor) return;
+    float distance = sensorDdd.readDistanceAvarage();
+    if(distance >= TAKEOFF_DISTANCE){
+        if(droneExitStartTime == 0){
+            droneExitStartTime = millis();
+        } else if (millis() - droneExitStartTime >= TAKEOFF_TIME){
+            completeTakeOff();
+        }
+    } else {
+        droneExitStartTime = 0;
+    }
+}
+
+void TakeOff::completeTakeOff()
+{
     servoMotor.close();
     Hardware::updateClosingDoor();
     lcdDisplay.activateClearFlag();
     lcdDisplay.printLine("DRONE OUT");
+    openHangarDoor = false;
+    droneExitStartTime = 0;
+    state = TakeOffState::DRONE_OUT;
 }
 
 void TakeOff::tick()
 {
-    takingOff();
-    droneHasLeft();
+    servoMotor.update();
+    switch(state) {
+        case TakeOffState::WAIT_COMMAND:
+            //in attesa di comando
+            break;
+        case TakeOffState::TAKING_OFF:
+            takingOff();
+            break;
+        case TakeOffState::WAIT_DRONE_EXIT:
+            monitorDroneExit();
+            break;
+        case TakeOffState::DRONE_OUT:
+            //finite operazioni
+            break;
+    }
 }

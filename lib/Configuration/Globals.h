@@ -9,9 +9,10 @@
 #define     L_ALARM         4//pin
 #define     B_RESET         5//pin
 #define     P_S_PIR         6//pin
-#define     P_S_DDD         7//pin
-#define     P_S_TEMP        8//pin
-#define     P_SERVOMOTOR    9//pin
+#define     P_S_DDD_ECHO    7//pin
+#define     P_S_DDD_TRIG    8//PIN
+#define     P_S_TEMP        9//pin
+#define     P_SERVOMOTOR    10//pin
 
 /* ---- GLOBAL CONSTANT VARIABLE ---- */
 static const int    TAKEOFF_DISTANCE   =      100; //da aggiustare

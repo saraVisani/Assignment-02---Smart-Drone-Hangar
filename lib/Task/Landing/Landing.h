@@ -3,10 +3,30 @@
 
 #include "Task.h"
 
+enum class LandingState {
+    WAIT_COMMAND,
+    LANDING,
+    WAIT_DRONE_LAND,
+    DRONE_INSIDE
+};
+
 class Landing: public Task{
+    private:
+    unsigned long droneLandStartTime;
+    LandingState state;
+    bool openHangarDoor;
+    void landing();
+    void monitroDroneLanding();
+    void completeLanding();
+
     public:
+    Landing();
+
+    inline TaskType getType() override {
+        return TaskType::T_LANDING;
+    };
+    void receiveCommand();
     void tick() override;
-    inline TaskType getType() override;
 };
 
 #endif
