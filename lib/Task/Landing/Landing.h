@@ -4,7 +4,6 @@
 #include "Task.h"
 
 enum class LandingState {
-    WAIT_COMMAND,
     LANDING,
     WAIT_DRONE_LAND,
 };

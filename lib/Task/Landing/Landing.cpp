@@ -2,6 +2,7 @@
 
 Landing::Landing()
     : droneLandStartTime(0),
+      state (LandingState::Landing),
       openHangarDoor(false) 
 {}
 
@@ -40,7 +41,7 @@ void Landing::completeLanding()
     lcdDisplay.printLine("DRONE INSIDE");
     openHangarDoor = false;
     droneLandStartTime = 0;
-    state = LandingState::DRONE_INSIDE;
+    state = LandingState::LANDING;
     State::setDroneState(DroneState::IDLE);
 }
 
@@ -53,8 +54,6 @@ void Landing::tick()
             break;
         case LandingState::WAIT_DRONE_LAND:
             monitroDroneLanding();
-            break;
-        case LandingState::DRONE_INSIDE:
             break;
     }
 }

@@ -14,7 +14,7 @@ void TakeOff::takingOff()
         lcdDisplay.activateClearFlag();
         lcdDisplay.printLine("TAKE OFF");
         openHangarDoor = true;
-        state = TakeOffState::DRONE_OUT;
+        state = TakeOffState::WAIT_DRONE_EXIT;
     }
 }
 
@@ -41,7 +41,7 @@ void TakeOff::completeTakeOff()
     lcdDisplay.printLine("DRONE OUT");
     openHangarDoor = false;
     droneExitStartTime = 0;
-    state = TakeOffState::DRONE_OUT;
+    state = TakeOffState::TAKING_OFF;
     State::setDroneState(DroneState::OPERATING);
 }
 
@@ -49,17 +49,11 @@ void TakeOff::tick()
 {
     servoMotor.update();
     switch(state) {
-        case TakeOffState::WAIT_COMMAND:
-            //in attesa di comando
-            break;
         case TakeOffState::TAKING_OFF:
             takingOff();
             break;
         case TakeOffState::WAIT_DRONE_EXIT:
             monitorDroneExit();
-            break;
-        case TakeOffState::DRONE_OUT:
-            //finite operazioni
             break;
     }
 }
