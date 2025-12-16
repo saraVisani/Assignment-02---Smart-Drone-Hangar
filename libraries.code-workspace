@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../Arduino/libraries"
+		},
+		{
+			"name": "Elaborato_2",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

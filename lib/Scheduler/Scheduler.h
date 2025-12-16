@@ -18,6 +18,7 @@ class Scheduler {
         bool activateTempTask(TaskType type);
         bool activateTaskMovement(TaskType type);
         bool activateLed(TaskType type);
+        bool activateDoor(TaskType type);
 
     public:
         void init(int basePeriod);

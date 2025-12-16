@@ -20,6 +20,9 @@ void setup() {
   Task* ledTask = new LedInAction();
   ledTask->init(40);
   scheduler.addTask(ledTask);
+  Task* doorTask = new Door();
+  doorTask->init(30);
+  scheduler.addTask(doorTask);
 }
 
 void loop() {

@@ -8,4 +8,5 @@
 #include "./LedInAction/LedInAction.h"
 #include "./TakeOff/TakeOff.h"
 #include "./Landing/Landing.h"
+#include "./Door/Door.h"
 #endif

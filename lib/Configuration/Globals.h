@@ -130,7 +130,8 @@ typedef enum {
     T_TAKEOFF,
     T_LANDING,
     T_LEDINACTION,
-    T_CHECK_INSIDE_TEMPERATURE
+    T_CHECK_INSIDE_TEMPERATURE,
+    T_DOOR
 } TaskType;
 
 static inline bool matchTaskType(TaskType t1, TaskType t2) {
@@ -153,6 +154,8 @@ static bool matchTaskType(TaskType t1, String t2) {
         tt = T_CHECK_INSIDE_TEMPERATURE;
     } else if(t2 == "T_LEDINACTION") {
         tt = T_LEDINACTION;
+    } else if(t2 == "T_DOOR") {
+        tt = T_DOOR;
     } else {
         return false;
     }
@@ -171,6 +174,8 @@ static bool isNotTaskType(TaskType t1, String t2) {
         tt = T_LEDINACTION;
     } else if(t2 == "T_CHECK_INSIDE_TEMPERATURE") {
         tt = T_CHECK_INSIDE_TEMPERATURE;
+    } else if(t2 == "T_DOOR") {
+        tt = T_DOOR;
     } else {
         return false;
     }

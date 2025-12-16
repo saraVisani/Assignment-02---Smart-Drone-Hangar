@@ -46,6 +46,15 @@ bool Scheduler::activateLed(TaskType type)
     return false;
 }
 
+bool Scheduler::activateDoor(TaskType type)
+{
+    if(isNotTaskType(type, T_DOOR)){
+        return true;
+    }
+    return (servoMotor.isOpening() && !servoMotor.isOpened() )
+            || (!servoMotor.isClosed() && servoMotor.isClosing());
+}
+
 void Scheduler::init(int basePeriod) {
     this->basePeriod = basePeriod;
     timer.setupPeriod(basePeriod);
@@ -74,7 +83,8 @@ void Scheduler::schedule() {
                 && taskList[i]->updateAndCheckTime(basePeriod)
                 && activateTempTask(taskList[i]->getType())
                 && activateTaskMovement(taskList[i]->getType())
-                && activateLed(taskList[i]->getType())     ) {
+                && activateLed(taskList[i]->getType())
+                && activateDoor(taskList[i]->getType())    ){
             taskList[i]->tick();
         }
     }
