@@ -66,8 +66,14 @@ public:
         static inline void setTemperatureInside(float temperature) {
             temperatureInside = temperature;
         }
+        static inline float getTemperatureInside() {
+            return temperatureInside;
+        }
         static inline float setDistanceFromHangar(float distance) {
             distanceFromHangar = distance;
+        }
+        static inline float getDistanceFromHangar() {
+            return distanceFromHangar;
         }
 };
 

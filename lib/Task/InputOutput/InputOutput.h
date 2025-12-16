@@ -9,6 +9,7 @@ class InputOutput: public Task {
         inline bool isHangarAvailable();
         void read();
         void send();
+        void logs();
 
     public:
         void tick() override;
