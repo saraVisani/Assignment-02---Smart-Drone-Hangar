@@ -2,6 +2,7 @@
 
 void CheckInsideTemperature::checkTemperature() {
     float currentTemp = sensorTemp.readTemperature();
+    State::setTemperatureInside(currentTemp);
     unsigned long now = millis();
 
     //if temp is ok and system not in alarm

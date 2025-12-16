@@ -44,6 +44,8 @@ public:
         static DroneState droneState;
         static SystemState systemState;
         static float distanceToGround;
+        static float temperatureInside;
+        static float distanceFromHangar;
     public:
         static void setDroneState(DroneState newState);
         static void setSystemState(SystemState newState);
@@ -61,6 +63,12 @@ public:
         static inline float getDistanceToGround();
         static inline void addDistanceToGround(float distance);
         static inline void subtractDistanceToGround(float distance);
+        static inline void setTemperatureInside(float temperature) {
+            temperatureInside = temperature;
+        }
+        static inline float setDistanceFromHangar(float distance) {
+            distanceFromHangar = distance;
+        }
 };
 
 /* ---- ENUM FOR THE HARDWARE ---- */
