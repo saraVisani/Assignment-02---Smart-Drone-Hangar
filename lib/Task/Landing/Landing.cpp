@@ -22,6 +22,7 @@ void Landing::monitorDroneLanding()
 {
     if(state != LandingState::WAIT_DRONE_LAND || !openHangarDoor) return;
     float distance = sensorDdd.readDistanceAvarage();
+    State::setDistanceToGround(distance);
     if(distance < LANDING_DISTANCE){
         if(droneLandStartTime == 0){
             droneLandStartTime = millis();

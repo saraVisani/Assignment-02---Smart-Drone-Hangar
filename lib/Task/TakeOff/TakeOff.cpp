@@ -22,6 +22,7 @@ void TakeOff::monitorDroneExit()
 {
     if(state != TakeOffState::WAIT_DRONE_EXIT || !openHangarDoor) return;
     float distance = sensorDdd.readDistanceAvarage();
+    State::setDistanceFromHangar(distance);
     if(distance >= TAKEOFF_DISTANCE){
         if(droneExitStartTime == 0){
             droneExitStartTime = millis();
