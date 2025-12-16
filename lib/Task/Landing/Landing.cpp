@@ -2,7 +2,7 @@
 
 Landing::Landing()
     : droneLandStartTime(0),
-      state (LandingState::Landing),
+      state (LandingState::LANDING),
       openHangarDoor(false) 
 {}
 
@@ -18,7 +18,7 @@ void Landing::landing()
     }
 }
 
-void Landing::monitroDroneLanding()
+void Landing::monitorDroneLanding()
 {
     if(state != LandingState::WAIT_DRONE_LAND || !openHangarDoor) return;
     float distance = sensorDdd.readDistanceAvarage();
@@ -53,7 +53,7 @@ void Landing::tick()
             landing();
             break;
         case LandingState::WAIT_DRONE_LAND:
-            monitroDroneLanding();
+            monitorDroneLanding();
             break;
     }
 }
