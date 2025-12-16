@@ -50,6 +50,7 @@ void TakeOff::completeTakeOff()
     openHangarDoor = false;
     droneExitStartTime = 0;
     state = TakeOffState::DRONE_OUT;
+    State::setDroneState(DroneState::OPERATING);
 }
 
 void TakeOff::tick()

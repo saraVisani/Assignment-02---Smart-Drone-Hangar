@@ -50,6 +50,7 @@ void Landing::completeLanding()
     openHangarDoor = false;
     droneLandStartTime = 0;
     state = LandingState::DRONE_INSIDE;
+    State::setDroneState(DroneState::IDLE);
 }
 
 void Landing::tick()
