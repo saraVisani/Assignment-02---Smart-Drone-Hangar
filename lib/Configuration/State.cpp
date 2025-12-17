@@ -62,3 +62,27 @@ inline void State::addDistanceToGround(float distance) {
 inline void State::subtractDistanceToGround(float distance) {
     distanceToGround -= distance;
 }
+
+inline void State::setTemperatureInside(float temperature) {
+    temperatureInside = temperature;
+}
+
+inline float State::getTemperatureInside() {
+    return temperatureInside;
+}
+
+inline void State::setDistanceFromHangar(float distance) {
+    distanceFromHangar = distance;
+}
+
+inline float State::getDistanceFromHangar() {
+    return distanceFromHangar;
+}
+
+inline void State::setSingleDistance(float distance) {
+    singleDistance = distance;
+}
+
+inline float State::getSingleDistance() {
+    return singleDistance;
+}

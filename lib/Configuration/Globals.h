@@ -24,7 +24,7 @@ static const int    PREALARM_TIME      =      10000; //da aggiustare
 static const int    ALARM_TIME         =      20000; //da aggiustare
 
 /* ---- BUTTON INTERUPT ---- */
-volatile bool resetAllarm = false; 
+volatile bool resetAllarm = false;
 
 /* ---- ENUM FOR THE STATUSES ---- */
 typedef enum {
@@ -49,6 +49,7 @@ public:
         static float distanceToGround;
         static float temperatureInside;
         static float distanceFromHangar;
+        static float singleDistance;
     public:
         static void setDroneState(DroneState newState);
         static void setSystemState(SystemState newState);
@@ -66,18 +67,12 @@ public:
         static inline float getDistanceToGround();
         static inline void addDistanceToGround(float distance);
         static inline void subtractDistanceToGround(float distance);
-        static inline void setTemperatureInside(float temperature) {
-            temperatureInside = temperature;
-        }
-        static inline float getTemperatureInside() {
-            return temperatureInside;
-        }
-        static inline float setDistanceFromHangar(float distance) {
-            distanceFromHangar = distance;
-        }
-        static inline float getDistanceFromHangar() {
-            return distanceFromHangar;
-        }
+        static inline void setTemperatureInside(float temperature);
+        static inline float getTemperatureInside();
+        static inline void setDistanceFromHangar(float distance);
+        static inline float getDistanceFromHangar();
+        static inline void setSingleDistance(float distance);
+        static inline float getSingleDistance();
 };
 
 /* ---- ENUM FOR THE HARDWARE ---- */

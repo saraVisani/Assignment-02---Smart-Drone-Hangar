@@ -9,18 +9,16 @@ Sddd sensorDdd;
 Stemp sensorTemp;
 Lcd lcdDisplay;
 
-void Hardware::irs()
-{
+void Hardware::irs() {
     if(lastPress == 0){
         resetAllarm = true;
     } else if(millis() - lastPress >= threshold){
         resetAllarm = true;
-    } 
+    }
     lastPress = millis();
 }
 
-void Hardware::initAllHardware()
-{
+void Hardware::initAllHardware() {
     Serial.begin(9600);
     ledOn.init(L_ON);
     ledAct.init(L_ACT);
@@ -55,12 +53,10 @@ void Hardware::setDoorPosition(int angle) {
     servoMotor.setPosition(angle);
 }
 
-void Hardware::updateClosingDoor()
-{
+void Hardware::updateClosingDoor() {
     if(servoMotor.isClosing()) servoMotor.update();
 }
 
-void Hardware::updateOpeningDoor()
-{
+void Hardware::updateOpeningDoor() {
     if(servoMotor.isOpening()) servoMotor.update();
 }

@@ -42,14 +42,16 @@ void InputOutput::send() {
     String statusMessage = State::currentSystemStateString() + "-" + State::currentDroneStateString();
     if (State::matchDroneState(LANDING)) {
         statusMessage += "-" + String(State::getDistanceToGround());
+        /**
+         * For logs porpuses saved in a different way in java application.
+         * They must begin by *
+         */
+        statusMessage = "-*-" + String(State::getSingleDistance()) + "-";
     }
-    /**
-     * For logs porpuses saved in a different way in java application.
-     * They must begin by *
-     */
-    statusMessage = "-*-" + String(State::getTemperatureInside()) + "-";
+
+    statusMessage = String(State::getTemperatureInside()) + "-";
     if(State::matchDroneState(TAKEOFF)){
-        statusMessage += String(State::getDistanceFromHangar());
+        statusMessage += String(State::getDistanceFromHangar()) + "-" + String(State::getSingleDistance());
     } else {
         statusMessage += "N/A";
     }
@@ -67,12 +69,12 @@ void InputOutput::logs()
     String statusMessage = "*-" + State::currentSystemStateString() + "-" + State::currentDroneStateString();
     statusMessage += "-" + String(State::getTemperatureInside()) + "-";
     if(State::matchDroneState(TAKEOFF)){
-        statusMessage += String(State::getDistanceFromHangar()) + "-";
+        statusMessage += String(State::getDistanceFromHangar()) + "-" + String(State::getSingleDistance()) + "-";
     } else {
         statusMessage += "N/A-";
     }
     if(State::matchDroneState(LANDING)) {
-        statusMessage += String(State::getDistanceToGround());
+        statusMessage += String(State::getDistanceToGround()) + "-" + String(State::getSingleDistance());
     } else {
         statusMessage += "N/A";
     }
