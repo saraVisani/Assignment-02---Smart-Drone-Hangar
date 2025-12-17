@@ -8,29 +8,33 @@ Landing::Landing()
 
 void Landing::landing()
 {
-    if(!openHangarDoor){
-        servoMotor.open();
-        Hardware::updateOpeningDoor();
-        lcdDisplay.activateClearFlag();
-        lcdDisplay.printLine("LANDING");
-        openHangarDoor = true;
-        state = LandingState::WAIT_DRONE_LAND;
+    if(sensorPir.isDroneDetected()){
+        if(!openHangarDoor){
+            servoMotor.open();
+            Hardware::updateOpeningDoor();
+            lcdDisplay.activateClearFlag();
+            lcdDisplay.printLine("LANDING");
+            openHangarDoor = true;
+            state = LandingState::WAIT_DRONE_LAND;
+        }
     }
 }
 
 void Landing::monitorDroneLanding()
 {
     if(state != LandingState::WAIT_DRONE_LAND || !openHangarDoor) return;
-    float distance = sensorDdd.readDistanceAvarage();
-    State::setDistanceToGround(distance);
-    if(distance < LANDING_DISTANCE){
-        if(droneLandStartTime == 0){
-            droneLandStartTime = millis();
-        } else if (millis() - droneLandStartTime >= LANDING_TIME){
-            completeLanding();
+    float distance;
+    if(sensorDdd.readDistanceAvarage(distance)){
+        State::setDistanceToGround(distance);
+        if(distance < LANDING_DISTANCE){
+            if(droneLandStartTime == 0){
+                droneLandStartTime = millis();
+            } else if (millis() - droneLandStartTime >= LANDING_TIME){
+                completeLanding();
+            }
+        } else {
+            droneLandStartTime = 0;
         }
-    } else {
-        droneLandStartTime = 0;
     }
 }
 

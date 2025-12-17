@@ -21,16 +21,18 @@ void TakeOff::takingOff()
 void TakeOff::monitorDroneExit()
 {
     if(state != TakeOffState::WAIT_DRONE_EXIT || !openHangarDoor) return;
-    float distance = sensorDdd.readDistanceAvarage();
-    State::setDistanceFromHangar(distance);
-    if(distance >= TAKEOFF_DISTANCE){
-        if(droneExitStartTime == 0){
-            droneExitStartTime = millis();
-        } else if (millis() - droneExitStartTime >= TAKEOFF_TIME){
-            completeTakeOff();
+    float distance;
+    if(sensorDdd.readDistanceAvarage(distance)){
+        State::setDistanceFromHangar(distance);
+        if(distance >= TAKEOFF_DISTANCE){
+            if(droneExitStartTime == 0){
+                droneExitStartTime = millis();
+            } else if (millis() - droneExitStartTime >= TAKEOFF_TIME){
+                completeTakeOff();
+            }
+        } else {
+            droneExitStartTime = 0;
         }
-    } else {
-        droneExitStartTime = 0;
     }
 }
 

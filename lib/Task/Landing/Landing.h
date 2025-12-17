@@ -23,7 +23,6 @@ class Landing: public Task{
     inline TaskType getType() override {
         return TaskType::T_LANDING;
     };
-    void receiveCommand();
     void tick() override;
 };
 

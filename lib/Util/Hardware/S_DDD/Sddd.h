@@ -13,7 +13,7 @@ class Sddd : public Component {
             return HardwareType::S_DDD;
         }
         float readDistance();
-        float readDistanceAvarage(int samples = 5);
+        bool readDistanceAvarage(float &avarage, int samples = 5);
         bool isDroneInside();
         bool isDroneOutside();
         void printDistanceDebug();

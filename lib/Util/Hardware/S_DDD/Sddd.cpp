@@ -19,15 +19,15 @@ float Sddd::readDistance() {
     return lastDistance;
 }
 
-float Sddd::readDistanceAvarage(int samples)
+bool Sddd::readDistanceAvarage(float &avarage, int samples)
 {
     float tot = 0;
-    for (int i = 0; i < samples; i++){
-        tot += readDistance();
-        delay(10); 
-    }
-    lastDistance = tot / samples;
-    return lastDistance;
+    int count = 0;
+    tot += readDistance();
+    if(count == N){
+        avarage = tot / samples;
+        return true;
+    } return false;
 }
 
 bool Sddd::isDroneInside()
