@@ -4,7 +4,7 @@ Scheduler scheduler;
 
 void setup() {
   Hardware::initAllHardware();
-  scheduler.init(120);
+  scheduler.init(200);
   Task* ioTask = new InputOutput();
   ioTask->init(20);
   scheduler.addTask(ioTask);
