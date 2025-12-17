@@ -35,7 +35,7 @@ void CheckInsideTemperature::checkTemperature() {
 }
 
 void CheckInsideTemperature::checkForReset() {
-    if(buttonReset.isPressed()){
+    if(resetAllarm){
         State::setSystemState(OK);
         lastTempCheckTime = 0;
         ledAlarm.turnOff();
