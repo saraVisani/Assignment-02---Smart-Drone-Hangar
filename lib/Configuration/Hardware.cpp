@@ -9,7 +9,18 @@ Sddd sensorDdd;
 Stemp sensorTemp;
 Lcd lcdDisplay;
 
-void Hardware::initAllHardware() {
+void Hardware::irs()
+{
+    if(lastPress == 0){
+        resetAllarm = true;
+    } else if(millis() - lastPress >= threshold){
+        resetAllarm = true;
+    } 
+    lastPress = millis();
+}
+
+void Hardware::initAllHardware()
+{
     Serial.begin(9600);
     ledOn.init(L_ON);
     ledAct.init(L_ACT);
@@ -19,6 +30,7 @@ void Hardware::initAllHardware() {
     sensorDdd.init();
     sensorTemp.init();
     lcdDisplay.init();
+    buttonReset.addInterrupt(irs);
 }
 
 void Hardware::openDoor() {

@@ -7,3 +7,9 @@ void Button::init(int pin = 0){
 bool Button::isPressed() {
     return digitalRead(B_RESET) == LOW;
 }
+
+void Button::addInterrupt(function<void()> fun)
+{
+    attachInterrupt(digitalPinToInterrupt(B_RESET), fun, FALLING);
+    activateInterrupt = true;
+}

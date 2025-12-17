@@ -23,6 +23,9 @@ static const int    TEMP_THRESHOLD     =      75; //da aggiustare
 static const int    PREALARM_TIME      =      10000; //da aggiustare
 static const int    ALARM_TIME         =      20000; //da aggiustare
 
+/* ---- BUTTON INTERUPT ---- */
+volatile bool resetAllarm = false; 
+
 /* ---- ENUM FOR THE STATUSES ---- */
 typedef enum {
     IDLE,

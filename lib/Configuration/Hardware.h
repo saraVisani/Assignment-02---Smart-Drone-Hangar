@@ -22,6 +22,10 @@ extern Lcd lcdDisplay;
 extern ServoMotor servoMotor;
 
 class Hardware {
+private:
+    void irs();
+    unsigned long lastPress = 0;
+    unsigned long threshold = 20;
 public:
     static void initAllHardware();
     static void openDoor();
