@@ -41,6 +41,7 @@ void CheckInsideTemperature::checkForReset() {
         ledAlarm.turnOff();
         lcdDisplay.activateClearFlag();
         lcdDisplay.clear();
+        resetAllarm = false;
     }
 }
 
