@@ -1,6 +1,6 @@
 #include <Configuration/Includes.h>
 
-Timer timer;
+RealTimer timer;
 Scheduler scheduler(timer);
 
 void setup() {
