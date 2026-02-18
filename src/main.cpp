@@ -1,9 +1,11 @@
-#include "../lib/Configuration/Includes.h"
+#include <Configuration/Includes.h>
 
-Scheduler scheduler;
+Timer timer;
+Scheduler scheduler(timer);
 
 void setup() {
-  Hardware::initAllHardware();
+  Serial.begin(9600);
+  hw->initAllHardware();
   scheduler.init(200);
   Task* ioTask = new InputOutput();
   ioTask->init(20);

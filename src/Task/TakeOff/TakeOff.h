@@ -1,0 +1,30 @@
+#ifndef __TAKEOFF__
+#define __TAKEOFF__
+
+#include "Task/Task.h"
+
+enum class TakeOffState {
+    TAKING_OFF,
+    WAIT_DRONE_EXIT,
+};
+
+class TakeOff: public Task{
+    private:
+    unsigned long droneExitStartTime;
+    TakeOffState state;
+    bool openHangarDoor;
+    void takingOff();
+    void monitorDroneExit();
+    void completeTakeOff();
+
+    public:
+    TakeOff();
+
+    void receiveCommand();
+    void tick() override;
+    inline TaskType getType() override {
+        return TaskType::T_TAKEOFF;
+    };
+};
+
+#endif
