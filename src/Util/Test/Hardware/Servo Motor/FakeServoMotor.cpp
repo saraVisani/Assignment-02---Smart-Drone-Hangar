@@ -2,8 +2,10 @@
 
 void FakeServoMotor::init(int pin) {
     angle = 0;
+    targetAngle = 0;
     closed = true;
     opened = false;
+    lastStepTime = 0;
     //motor.write(angle);
 }
 

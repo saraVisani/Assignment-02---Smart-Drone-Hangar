@@ -78,11 +78,18 @@
     // =============================
     // millis()
     // =============================
+    static unsigned long fakeMillis = 0;
+
     inline unsigned long millis() {
-        using namespace std::chrono;
-        static auto start = std::chrono::steady_clock::now();
-        auto now = std::chrono::steady_clock::now();
-        return std::chrono::duration_cast<std::chrono::milliseconds>(now - start).count();
+        return fakeMillis;
+    }
+
+    inline void advanceMillis(unsigned long ms) {
+        fakeMillis += ms;
+    }
+
+    inline void resetMillis() {
+        fakeMillis = 0;
     }
 
     // =============================

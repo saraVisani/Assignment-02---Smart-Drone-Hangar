@@ -44,6 +44,7 @@ void RealHardware::initAllHardware() {
     sensorDdd->init();
     sensorTemp->init();
     lcdDisplay->init();
+    servoMotor->init();
 }
 
 void RealHardware::openDoor() {

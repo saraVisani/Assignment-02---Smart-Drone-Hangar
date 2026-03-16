@@ -33,16 +33,31 @@ FakeHardware::FakeHardware() {
     hw = this;
 }
 
-void FakeHardware::initAllHardware() {}
+void FakeHardware::initAllHardware() {
+    ledOn->init(L_ON);
+    ledAct->init(L_ACT);
+    ledAlarm->init(L_ALARM);
+    buttonReset->init();
+    sensorPir->init();
+    sensorDdd->init();
+    sensorTemp->init();
+    lcdDisplay->init();
+    servoMotor->init();
+}
 
 void FakeHardware::openDoor() {
+    Serial.println("Servo motor is opened: " + String(servoMotor->isOpened()));
+    Serial.println(State::matchDroneState(IDLE) || State::matchDroneState(OPERATING));
+    Serial.println("Current drone state: " + State::currentDroneStateString());
     if(!servoMotor->isOpened() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
+        Serial.println("Opening door...");
         servoMotor->open();
     }
 }
 
 void FakeHardware::closeDoor() {
     if(!servoMotor->isClosed() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
+        Serial.println("Closing door...");
         servoMotor->close();
     }
 }
