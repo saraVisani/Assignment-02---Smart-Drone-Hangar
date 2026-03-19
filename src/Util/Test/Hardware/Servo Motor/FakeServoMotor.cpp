@@ -31,7 +31,11 @@ void FakeServoMotor::close() {
 void FakeServoMotor::update() {
     if (angle == targetAngle) return;
 
+
+
     unsigned long now = millis();
+
+    Serial.println("Updating servo motor: now=" + String(now) + ", lastStepTime=" + String(lastStepTime) + ", stepDelay=" + String(stepDelay) + ", differenza=" + String(now - lastStepTime));
     if (now - lastStepTime < stepDelay) return;
     lastStepTime = now;
 
@@ -43,6 +47,8 @@ void FakeServoMotor::update() {
         angle -= stepSize;
         if (angle < targetAngle) angle = targetAngle;
     }
+
+    Serial.println("Updating servo motor: angle=" + String(angle) + ", targetAngle=" + String(targetAngle));
 
     setPosition(angle);
 }

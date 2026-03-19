@@ -40,6 +40,24 @@
             assign(oss.str());
         }
 
+        String(unsigned int v) {
+            std::ostringstream oss;
+            oss << v;
+            assign(oss.str());
+        }
+
+        String(unsigned long v) {
+            std::ostringstream oss;
+            oss << v;
+            assign(oss.str());
+        }
+
+        String(long v) {
+            std::ostringstream oss;
+            oss << v;
+            assign(oss.str());
+        }
+
         void trim() {
             const char* whitespace = " \t\n\r";
             size_t start = find_first_not_of(whitespace);
@@ -78,7 +96,7 @@
     // =============================
     // millis()
     // =============================
-    static unsigned long fakeMillis = 0;
+    extern unsigned long fakeMillis;
 
     inline unsigned long millis() {
         return fakeMillis;

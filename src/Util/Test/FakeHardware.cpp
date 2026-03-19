@@ -8,6 +8,7 @@
 #include "./Util/test/Hardware/Servo Motor/FakeServoMotor.h"
 
 Hardware* hw = nullptr;
+unsigned long fakeMillis = 0;
 
 FakeLed ledOnInstance;
 FakeLed ledActInstance;
