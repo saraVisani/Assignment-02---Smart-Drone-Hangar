@@ -13,6 +13,8 @@
     #include <iostream>
     #include <cctype>
     #include <cstring>
+    #include <queue>
+    #include <vector>
 
     typedef bool boolean;
 
@@ -75,23 +77,77 @@
     // Serial mock
     // =============================
     class SerialMock {
-    public:
-        void begin(int) {}
-        void setTimeout(int) {}
-        int available() { return 0; }
+        private:
+            std::queue<String> inputBuffer;
+            std::vector<String> outputBuffer;
 
-        String readStringUntil(char) {
-            return String("");
-        }
+        public:
+            void begin(int) {}
+            void setTimeout(int) {}
 
-        void print(const String& s) { std::cout << s; }
-        void print(const char* s) { std::cout << s; }
+            // =============================
+            // INPUT SIDE (test-controlled)
+            // =============================
+            void inject(const String& msg) {
+                inputBuffer.push(msg);
+            }
 
-        void println(const String& s) { std::cout << s << std::endl; }
-        void println(const char* s) { std::cout << s << std::endl; }
-    };
+            int available() {
+                return inputBuffer.empty() ? 0 : 1;
+            }
 
-    static SerialMock Serial;
+            String readStringUntil(char) {
+                if (inputBuffer.empty()) return String("");
+                String msg = inputBuffer.front();
+                inputBuffer.pop();
+                return msg;
+            }
+
+            // =============================
+            // OUTPUT SIDE (test निरीक्षण)
+            // =============================
+            void print(const String& s) {
+                outputBuffer.push_back(s);
+            }
+
+            void print(const char* s) {
+                outputBuffer.push_back(String(s));
+            }
+
+            void println(const String& s) {
+                outputBuffer.push_back(s);
+            }
+
+            void println(const char* s) {
+                outputBuffer.push_back(String(s));
+            }
+
+            // =============================
+            // TEST HELPERS
+            // =============================
+            const std::vector<String>& getOutput() const {
+                return outputBuffer;
+            }
+
+            String getLastOutput() const {
+                if (outputBuffer.empty()) return "";
+                return outputBuffer.back();
+            }
+
+            void clear() {
+                while (!inputBuffer.empty()) inputBuffer.pop();
+                outputBuffer.clear();
+            }
+
+            bool serialContains(const std::string& substring) const {
+                for(const auto& line : outputBuffer) {
+                    if(line.find(substring) != std::string::npos) return true;
+                }
+                return false;
+            }
+        };
+
+    extern SerialMock Serial;
 
     // =============================
     // millis()

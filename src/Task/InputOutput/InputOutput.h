@@ -6,6 +6,7 @@
 class InputOutput: public Task {
 
     private:
+        bool logsEnabled = false;
         inline bool isHangarAvailable();
         void read();
         void send();

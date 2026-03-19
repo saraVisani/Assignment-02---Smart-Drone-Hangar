@@ -14,6 +14,21 @@ void test_servo_reaches_open_position();
 void test_servo_closes();
 void test_servo_waits_step_delay();
 
+void test_takeoff_command();
+void test_landing_command();
+void test_takeoff_not_from_idle();
+void test_landing_not_from_operating();
+void test_takeoff_case_insensitive();
+void test_takeoff_with_spaces();
+void test_unknown_command();
+void test_command_ignored_when_not_ok();
+void test_logs_command();
+void test_logs_priority_over_commands();
+void test_multiple_commands();
+void test_send_idle_format();
+void test_send_takeoff_format();
+void test_send_landing_format();
+
 void setUp() {}
 void tearDown() {}
 
@@ -34,6 +49,22 @@ int main() {
     RUN_TEST(test_servo_reaches_open_position);
     RUN_TEST(test_servo_closes);
     RUN_TEST(test_servo_waits_step_delay);
+
+    // InputOutput tests
+    RUN_TEST(test_takeoff_command);
+    RUN_TEST(test_landing_command);
+    RUN_TEST(test_takeoff_not_from_idle);
+    RUN_TEST(test_landing_not_from_operating);
+    RUN_TEST(test_takeoff_case_insensitive);
+    RUN_TEST(test_takeoff_with_spaces);
+    RUN_TEST(test_unknown_command);
+    RUN_TEST(test_command_ignored_when_not_ok);
+    RUN_TEST(test_logs_command);
+    RUN_TEST(test_logs_priority_over_commands);
+    RUN_TEST(test_multiple_commands);
+    RUN_TEST(test_send_idle_format);
+    RUN_TEST(test_send_takeoff_format);
+    RUN_TEST(test_send_landing_format);
 
     return UNITY_END();
 }

@@ -9,6 +9,7 @@
 
 Hardware* hw = nullptr;
 unsigned long fakeMillis = 0;
+SerialMock Serial;
 
 FakeLed ledOnInstance;
 FakeLed ledActInstance;

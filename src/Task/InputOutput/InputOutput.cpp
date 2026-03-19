@@ -10,7 +10,7 @@ void InputOutput::read() {
         incoming.trim();
 
         if(strcasecmp(incoming.c_str(), "logs") == 0) {
-            logs();
+            logsEnabled = true;
             return;
         }
 
@@ -39,17 +39,17 @@ void InputOutput::send() {
      *  /n to indicate the start of a new message
      *  - separators between fields
      */
-    String statusMessage = State::currentSystemStateString() + "-" + State::currentDroneStateString();
+    String statusMessage = State::currentSystemStateString() + "-" + State::currentDroneStateString() + "-";
     if (State::matchDroneState(LANDING)) {
-        statusMessage += "-" + String(State::getDistanceToGround());
+        statusMessage += String(State::getDistanceToGround());
         /**
          * For logs porpuses saved in a different way in java application.
          * They must begin by *
          */
-        statusMessage = "-*-" + String(State::getSingleDistance()) + "-";
+        statusMessage += "-*-" + String(State::getSingleDistance()) + "-";
     }
 
-    statusMessage = String(State::getTemperatureInside()) + "-";
+    statusMessage += String(State::getTemperatureInside()) + "-";
     if(State::matchDroneState(TAKEOFF)){
         statusMessage += String(State::getDistanceFromHangar()) + "-" + String(State::getSingleDistance());
     } else {
@@ -66,8 +66,9 @@ void InputOutput::logs()
      *  * to indicate the start of a log message
      *  - separators between fields
      */
-    String statusMessage = "*-" + State::currentSystemStateString() + "-" + State::currentDroneStateString();
-    statusMessage += "-" + String(State::getTemperatureInside()) + "-";
+    String statusMessage = "*-" + State::currentSystemStateString() + "-"
+                                + State::currentDroneStateString() + "-"
+                                + String(State::getTemperatureInside()) + "-";
     if(State::matchDroneState(TAKEOFF)){
         statusMessage += String(State::getDistanceFromHangar()) + "-" + String(State::getSingleDistance()) + "-";
     } else {
@@ -83,5 +84,10 @@ void InputOutput::logs()
 
 void InputOutput::tick() {
     read();
-    send();
+    if(logsEnabled) {
+        logs();
+        logsEnabled = false;
+    } else {
+        send();
+    }
 }
