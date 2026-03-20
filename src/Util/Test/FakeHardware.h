@@ -2,6 +2,13 @@
 #define __FAKEHARDWARE__
 
 #include "./Configuration/Hardware.h"
+#include "./Util/test/Hardware/Led/FakeLed.h"
+#include "./Util/test/Hardware/Button/FakeButton.h"
+#include "./Util/test/Hardware/LCD/FakeLcd.h"
+#include "./Util/test/Hardware/S_Pir/FakeSpir.h"
+#include "./Util/test/Hardware/S_DDD/FakeSddd.h"
+#include "./Util/test/Hardware/S_Temp/FakeStemp.h"
+#include "./Util/test/Hardware/Servo Motor/FakeServoMotor.h"
 
 class FakeHardware : public Hardware {
 private:

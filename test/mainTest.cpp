@@ -29,6 +29,16 @@ void test_send_idle_format();
 void test_send_takeoff_format();
 void test_send_landing_format();
 
+void test_temperature_ok_stays_ok();
+void test_temperature_high_goes_prealarm();
+void test_temperature_high_goes_alarm();
+void test_alarm_protocol_led_on();
+void test_alarm_protocol_lcd_message();
+void test_alarm_protocol_closes_door();
+void test_reset_from_alarm();
+void test_prealarm_back_to_ok_when_temp_normal();
+void test_alarm_not_reentered_if_already_alarm();
+
 void setUp() {}
 void tearDown() {}
 
@@ -65,6 +75,17 @@ int main() {
     RUN_TEST(test_send_idle_format);
     RUN_TEST(test_send_takeoff_format);
     RUN_TEST(test_send_landing_format);
+
+    // CheckInsideTemperature tests
+    RUN_TEST(test_temperature_ok_stays_ok);
+    RUN_TEST(test_temperature_high_goes_prealarm);
+    RUN_TEST(test_temperature_high_goes_alarm);
+    RUN_TEST(test_alarm_protocol_led_on);
+    RUN_TEST(test_alarm_protocol_lcd_message);
+    RUN_TEST(test_alarm_protocol_closes_door);
+    RUN_TEST(test_reset_from_alarm);
+    RUN_TEST(test_prealarm_back_to_ok_when_temp_normal);
+    RUN_TEST(test_alarm_not_reentered_if_already_alarm);
 
     return UNITY_END();
 }

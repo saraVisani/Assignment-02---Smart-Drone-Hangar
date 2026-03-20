@@ -104,7 +104,7 @@
             }
 
             // =============================
-            // OUTPUT SIDE (test निरीक्षण)
+            // OUTPUT SIDE
             // =============================
             void print(const String& s) {
                 outputBuffer.push_back(s);
@@ -120,6 +120,10 @@
 
             void println(const char* s) {
                 outputBuffer.push_back(String(s));
+            }
+
+            void printToConsole(const String& s) {
+                std::cout << s << std::endl;
             }
 
             // =============================

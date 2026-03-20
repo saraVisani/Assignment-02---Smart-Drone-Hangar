@@ -1,11 +1,4 @@
 #include "FakeHardware.h"
-#include "./Util/test/Hardware/Led/FakeLed.h"
-#include "./Util/test/Hardware/Button/FakeButton.h"
-#include "./Util/test/Hardware/LCD/FakeLcd.h"
-#include "./Util/test/Hardware/S_Pir/FakeSpir.h"
-#include "./Util/test/Hardware/S_DDD/FakeSddd.h"
-#include "./Util/test/Hardware/S_Temp/FakeStemp.h"
-#include "./Util/test/Hardware/Servo Motor/FakeServoMotor.h"
 
 Hardware* hw = nullptr;
 unsigned long fakeMillis = 0;
@@ -48,18 +41,13 @@ void FakeHardware::initAllHardware() {
 }
 
 void FakeHardware::openDoor() {
-    Serial.println("Servo motor is opened: " + String(servoMotor->isOpened()));
-    Serial.println(State::matchDroneState(IDLE) || State::matchDroneState(OPERATING));
-    Serial.println("Current drone state: " + State::currentDroneStateString());
     if(!servoMotor->isOpened() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
-        Serial.println("Opening door...");
         servoMotor->open();
     }
 }
 
 void FakeHardware::closeDoor() {
     if(!servoMotor->isClosed() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
-        Serial.println("Closing door...");
         servoMotor->close();
     }
 }

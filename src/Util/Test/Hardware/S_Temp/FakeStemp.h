@@ -11,6 +11,7 @@ class FakeStemp : public IStemp {
         const float T0 = 298.15;
     public:
         void init(int pin = 0) override;
+        float temp = 0;
         float readTemperature() const override;
 };
 

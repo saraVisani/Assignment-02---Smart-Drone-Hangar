@@ -16,7 +16,7 @@ class ILcd : public Component {
         virtual void clearLine(int line = 0) = 0;
         virtual void on() = 0;
         virtual void off() = 0;
-        virtual inline void activateClearFlag() = 0;
+        virtual void activateClearFlag() = 0;
 };
 
 #endif

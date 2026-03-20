@@ -1,42 +1,34 @@
 #include "FakeLcd.h"
 
 void FakeLcd::init(int pin) {
-    //lcd.init();
-    //lcd.backlight();
+    cleared = false;
+    line1 = "";
+    line2 = "";
 }
 
-void FakeLcd::printLine(const char *message, int line) {
+void FakeLcd::printLine(const char* message, int line) {
     cleared = false;
-    if(line == 0) {
-        //lcd.setCursor(0, 0);
-        //lcd.print(message);
-        p_1 = true;
-    } else if(line == 1) {
-        //lcd.setCursor(0, 1);
-        //lcd.print(message);
-        p_2 = true;
+
+    if (line == 0) {
+        line1 = message;
+    } else if (line == 1) {
+        line2 = message;
     }
+}
+
+void FakeLcd::print(const char* message0, const char* message1) {
+    line1 = message0;
+    line2 = message1;
+    cleared = false;
 }
 
 void FakeLcd::clear() {
-    if(!cleared) {
-        //lcd.clear();
-        cleared = true;
-        p_1 = false;
-        p_2 = false;
-    }
+    cleared = true;
+    line1 = "";
+    line2 = "";
 }
 
 void FakeLcd::clearLine(int line) {
-    if(line == 0 && p_1) {
-        //lcd.setCursor(0, 0);
-        //lcd.print("                ");
-        //lcd.setCursor(0, 0);
-        p_1 = false;
-    } else if(line == 1 && p_2) {
-        //lcd.setCursor(0, 1);
-        //lcd.print("                ");
-        //lcd.setCursor(0, 1);
-        p_2 = false;
-    }
+    if (line == 0) line1 = "";
+    if (line == 1) line2 = "";
 }

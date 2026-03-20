@@ -12,5 +12,5 @@ float FakeStemp::readTemperature() const {
 
     float temperatureK = 1.0 / (1.0 / T0 + (1.0 / B) * log(R / R0));
     return temperatureK - 273.15;*/
-    return 0;
+    return temp;
 }
