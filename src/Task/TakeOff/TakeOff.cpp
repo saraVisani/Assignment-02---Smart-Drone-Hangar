@@ -11,6 +11,7 @@ void TakeOff::takingOff()
     if(!openHangarDoor){
         servoMotor->open();
         hw->updateOpeningDoor();
+        lcdDisplay->clear();
         lcdDisplay->activateClearFlag();
         lcdDisplay->printLine("TAKE OFF");
         openHangarDoor = true;
@@ -38,6 +39,7 @@ void TakeOff::monitorDroneExit()
 
 void TakeOff::completeTakeOff()
 {
+    ledOn->turnOff();
     servoMotor->close();
     hw->updateClosingDoor();
     lcdDisplay->activateClearFlag();

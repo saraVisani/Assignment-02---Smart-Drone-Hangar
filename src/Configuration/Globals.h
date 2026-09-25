@@ -11,11 +11,11 @@
 #define P_S_PIR 6       // pin
 #define P_S_DDD_ECHO 13  // pin
 #define P_S_DDD_TRIG 12  // PIN
-#define P_S_TEMP A5      // pin
+#define P_S_TEMP A3      // pin
 #define P_SERVOMOTOR 10 // pin
 
 /* ---- GLOBAL CONSTANT VARIABLE ---- */
-static const int TAKEOFF_DISTANCE = 100; // da aggiustare
+static const int TAKEOFF_DISTANCE = 35; // da aggiustare
 static const int LANDING_DISTANCE = 50;  // da aggiustare
 static const int TAKEOFF_TIME = 5000;    // da aggiustare
 static const int LANDING_TIME = 5000;    // da aggiustare

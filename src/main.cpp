@@ -25,6 +25,9 @@ void setup() {
   Task* doorTask = new Door();
   doorTask->init(10);
   scheduler.addTask(doorTask);
+  ledOn->turnOn();
+  lcdDisplay->activateClearFlag();
+  lcdDisplay->printLine("DRONE INSIDE");
 }
 
 void loop() {

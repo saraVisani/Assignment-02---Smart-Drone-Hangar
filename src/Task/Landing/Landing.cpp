@@ -40,6 +40,7 @@ void Landing::monitorDroneLanding()
 
 void Landing::completeLanding()
 {
+    ledOn->turnOn();
     servoMotor->close();
     hw->updateClosingDoor();
     lcdDisplay->activateClearFlag();
@@ -56,6 +57,7 @@ void Landing::tick()
     switch (state) {
         case LandingState::LANDING:
             landing();
+
             break;
         case LandingState::WAIT_DRONE_LAND:
             monitorDroneLanding();
