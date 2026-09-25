@@ -5,7 +5,7 @@
 
 class Stemp : public IStemp {
     private:
-        const float R_FIXED = 10000.0;
+        const float R_FIXED = 100000.0;
         const float R0 = 10000.0;
         const float B = 3950.0;
         const float T0 = 298.15;

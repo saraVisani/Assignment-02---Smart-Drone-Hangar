@@ -9,8 +9,8 @@
 #define L_ALARM 8       // pin
 #define B_RESET 5       // pin
 #define P_S_PIR 6       // pin
-#define P_S_DDD_ECHO 7  // pin
-#define P_S_DDD_TRIG 8  // PIN
+#define P_S_DDD_ECHO 13  // pin
+#define P_S_DDD_TRIG 12  // PIN
 #define P_S_TEMP 9      // pin
 #define P_SERVOMOTOR 10 // pin
 
