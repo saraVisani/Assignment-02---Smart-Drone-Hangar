@@ -7,6 +7,7 @@ class FakeSddd : public ISddd {
     private:
         float lastDistance = 0;
         int count = 0;
+        bool measurementAvailable = true;
 
     public:
         void init(int pin = 0) override;
@@ -16,6 +17,9 @@ class FakeSddd : public ISddd {
         bool isDroneOutside() const override;
         void printDistanceDebug() const override;
 
+        void setDistance(float distance);
+        void resetSamples();
+        void setMeasurementAvailable(bool available);
 };
 
 #endif
