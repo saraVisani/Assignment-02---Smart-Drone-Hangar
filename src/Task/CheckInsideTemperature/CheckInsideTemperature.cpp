@@ -26,7 +26,12 @@ void CheckInsideTemperature::checkTemperature() {
     //check if temp wasn't okay for which interval
     if (elapsed >= ALARM_TIME) {
         State::setSystemState(ALARM);
+        this->changeLine = millis();
         lcdDisplay->activateClearFlag();
+        lcdDisplay->clear();
+        lcdDisplay->print("ALARM TEMP", "TOO HIGH");
+        lcdDisplay->activateClearFlag();
+        this->switchLine = false;
         hw->closeDoor();
     }
     else if (elapsed >= PREALARM_TIME) {
@@ -42,15 +47,57 @@ void CheckInsideTemperature::checkForReset() {
         lcdDisplay->activateClearFlag();
         lcdDisplay->clear();
         resetAllarm = false;
+        if(State::matchDroneState(DroneState::OPERATING)){
+            lcdDisplay->printLine("DRONE OUT");
+        }
+        if(State::matchDroneState(DroneState::IDLE)){
+            lcdDisplay->printLine("DRONE INSIDE");
+        }
+        if(State::matchDroneState(DroneState::TAKEOFF)){
+            lcdDisplay->printLine("TAKE OFF");
+        }
+        if(State::matchDroneState(DroneState::LANDING)){
+            lcdDisplay->printLine("LANDING");
+        }
+        lcdDisplay->activateClearFlag();
     }
 }
 
 void CheckInsideTemperature::alarmProtocol(){
-    hw->closeDoor();
-    hw->updateClosingDoor();
+    if(!(servoMotor->isClosing() || servoMotor->isClosed()) &&
+        (State::matchDroneState(DroneState::IDLE) || State::matchDroneState(DroneState::OPERATING))){
+        hw->closeDoor();
+        hw->updateClosingDoor();
+        lcdDisplay->clear();
+        lcdDisplay->print("ALARM TEMP", "TOO HIGH");
+        lcdDisplay->activateClearFlag();
+    } else if(!(State::matchDroneState(DroneState::IDLE) || State::matchDroneState(DroneState::OPERATING))) {
+        if(millis() - this->changeLine >= 2000){
+            this->changeLine = millis();
+            if(!this->switchLine){
+                lcdDisplay->clear();
+                if(State::matchDroneState(DroneState::TAKEOFF)){
+                    lcdDisplay->printLine("TAKE OFF");
+                }
+                if(State::matchDroneState(DroneState::LANDING)){
+                    lcdDisplay->printLine("LANDING");
+                }
+                lcdDisplay->activateClearFlag();
+            } else {
+                lcdDisplay->clear();
+                lcdDisplay->print("ALARM TEMP", "TOO HIGH");
+                lcdDisplay->activateClearFlag();
+            }
+            this->switchLine = !this->switchLine;
+            this->rewrite = true;
+        }
+    } else if(this->rewrite){
+        lcdDisplay->clear();
+        lcdDisplay->print("ALARM TEMP", "TOO HIGH");
+        lcdDisplay->activateClearFlag();
+        this->rewrite = false;
+    }
     ledAlarm->turnOn();
-    lcdDisplay->clear();
-    lcdDisplay->print("ALARM TEMP", "TOO HIGH");
 }
 
 void CheckInsideTemperature::tick()

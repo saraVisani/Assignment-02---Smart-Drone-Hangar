@@ -48,6 +48,7 @@ void TakeOff::completeTakeOff()
     droneExitStartTime = 0;
     state = TakeOffState::TAKING_OFF;
     State::setDroneState(DroneState::OPERATING);
+    lcdDisplay->activateClearFlag();
 }
 
 void TakeOff::tick()

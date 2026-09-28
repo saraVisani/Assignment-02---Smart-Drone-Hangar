@@ -10,9 +10,13 @@ void ServoMotor::init(int pin) {
     motor.write(angle);
 }
 
+int ServoMotor::angleToPulse(){
+    return map(this->angle, 0, 180, 750, 2400);
+}
+
 void ServoMotor::setPosition(int angle) {
     this->angle = angle;
-    motor.write(angle);
+    motor.write(angleToPulse());
     opened = (angle == 180);
     closed = (angle == 0);
 }

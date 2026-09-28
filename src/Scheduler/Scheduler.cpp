@@ -13,7 +13,7 @@ bool Scheduler::isSkipped(TaskType type) {
 
 bool Scheduler::activateTempTask(TaskType type) {
     bool isTempTask = matchTaskType(type, T_CHECK_INSIDE_TEMPERATURE);
-    return !isTempTask || State::isNotDroneState(OPERATING);
+    return !isTempTask || State::isNotDroneState(OPERATING) || State::matchSystemState(SystemState::ALARM);
 }
 
 bool Scheduler::activateTaskMovement(TaskType type)
