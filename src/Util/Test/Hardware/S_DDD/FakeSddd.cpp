@@ -2,35 +2,31 @@
 
 void FakeSddd::init(int pin)
 {
-    /*pinMode(P_S_DDD_TRIG, OUTPUT);
-    pinMode(P_S_DDD_ECHO, INPUT);
-    digitalWrite(P_S_DDD_TRIG, LOW);*/
+    lastDistance = 0;
+    count = 0;
+    measurementAvailable = true;
 }
 
-float FakeSddd::readDistance() {
-    /*digitalWrite(P_S_DDD_TRIG, LOW);    // Assicura che il pin TRIG sia basso
-    delayMicroseconds(2);
-    digitalWrite(P_S_DDD_TRIG, HIGH);   // Invia impulso ultrasonico
-    delayMicroseconds(10);              // L’impulso dura 10 µs
-    digitalWrite(P_S_DDD_TRIG, LOW);    // Ferma impulso
-
-    long duration = pulseIn(P_S_DDD_ECHO, HIGH, 30000); // misura tempo in µs
-    lastDistance = duration * 0.034 / 2;               // distanza in cm
-    return lastDistance;*/
-    return 0;
+float FakeSddd::readDistance() 
+{
+    return lastDistance;
 }
 
 bool FakeSddd::readDistanceAvarage(float &avarage, int samples)
 {
-    float tot = 0;
+    if (!measurementAvailable) {
+        return false;
+    }
+
     count++;
-    tot += readDistance();
-    if(count == samples){
-        avarage = tot / samples;
-        lastDistance = avarage;
+
+    if (count == samples) {
+        avarage = lastDistance;
         count = 0;
         return true;
-    } return false;
+    }
+
+    return false;
 }
 
 bool FakeSddd::isDroneInside() const
@@ -45,6 +41,21 @@ bool FakeSddd::isDroneOutside() const
 
 void FakeSddd::printDistanceDebug() const
 {
-    Serial.print("Distance: ");
+    Serial.print("DDD Distance: ");
     Serial.println(lastDistance);
+}
+
+void FakeSddd::setDistance(float distance)
+{
+    lastDistance = distance;
+}
+
+void FakeSddd::resetSamples()
+{
+    count = 0;
+}
+
+void FakeSddd::setMeasurementAvailable(bool available)
+{
+    measurementAvailable = available;
 }

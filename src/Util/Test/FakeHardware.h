@@ -25,4 +25,18 @@ public:
     void updateOpeningDoor() override;
 };
 
+extern FakeLed ledOnInstance;
+extern FakeLed ledActInstance;
+extern FakeLed ledAlarmInstance;
+
+extern FakeButton buttonResetInstance;
+
+extern FakeSpir sensorPirInstance;
+extern FakeSddd sensorDddInstance;
+extern FakeStemp sensorTempInstance;
+
+extern FakeLcd lcdDisplayInstance;
+
+extern FakeServoMotor servoMotorInstance;
+
 #endif

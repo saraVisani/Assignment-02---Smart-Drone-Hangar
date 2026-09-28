@@ -11,6 +11,7 @@ class FakeSpir : public ISpir {
         void init(int pin = 0) override;
         bool isDroneDetected() const override;
         void printDebug() const override;
+        void setDroneDetected(bool detected);
 };
 
 #endif
