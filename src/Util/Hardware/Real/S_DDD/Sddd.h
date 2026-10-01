@@ -6,6 +6,7 @@
 class Sddd : public ISddd {
     private:
         float lastDistance = 0;
+        float totalDistance = 0;
         int count = 0;
     public:
         void init(int pin = 0) override;

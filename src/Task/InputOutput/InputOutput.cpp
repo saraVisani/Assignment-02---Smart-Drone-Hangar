@@ -87,7 +87,8 @@ void InputOutput::tick() {
     if(logsEnabled) {
         logs();
         logsEnabled = false;
-    } else {
+    } else if (lastSend == 0 || millis() - lastSend >= SEND_PERIOD) {
+        lastSend = millis();
         send();
     }
 }

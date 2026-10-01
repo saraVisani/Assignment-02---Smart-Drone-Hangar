@@ -12,8 +12,9 @@ void Landing::landing()
         if(!openHangarDoor){
             servoMotor->open();
             hw->updateOpeningDoor();
-            lcdDisplay->activateClearFlag();
+            lcdDisplay->clear();
             lcdDisplay->printLine("LANDING");
+            lcdDisplay->activateClearFlag();
             openHangarDoor = true;
             state = LandingState::WAIT_DRONE_LAND;
         }
