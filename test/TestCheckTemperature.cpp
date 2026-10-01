@@ -13,6 +13,7 @@ void mySetUpCheckTemperature() {
     resetMillis();
     hw->initAllHardware();
     temp->init(10);
+    State::setDroneState(DroneState::IDLE);
 }
 
 void myTearDownCheckTemperature() {

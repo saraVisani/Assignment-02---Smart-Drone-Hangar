@@ -21,13 +21,13 @@ float Sddd::readDistance() {
 
 bool Sddd::readDistanceAvarage(float &avarage, int samples)
 {
-    float tot = 0;
     count++;
-    tot += readDistance();
+    totalDistance += readDistance();
     if(count == samples){
-        avarage = tot / samples;
+        avarage = totalDistance / samples;
         lastDistance = avarage;
         count = 0;
+        totalDistance = 0;
         return true;
     } return false;
 }

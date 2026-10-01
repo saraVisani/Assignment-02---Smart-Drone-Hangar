@@ -6,6 +6,8 @@
 class InputOutput: public Task {
 
     private:
+        const unsigned long SEND_PERIOD = 750;
+        unsigned long lastSend = 0;
         bool logsEnabled = false;
         inline bool isHangarAvailable();
         void read();
