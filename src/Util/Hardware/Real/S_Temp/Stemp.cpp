@@ -6,10 +6,10 @@ void Stemp::init(int pin) {
 
 float Stemp::readTemperature() const {
     int raw = analogRead(P_S_TEMP);
-    float Vout = raw * (5.0 / 1023.0);
-
-    float R = R_FIXED * (5.0 / Vout - 1);
-
-    float temperatureK = 1.0 / (1.0 / T0 + (1.0 / B) * log(R / R0));
-    return temperatureK - 273.15;
+    if(raw != 0){
+        float R = R_FIXED * ((1023.0 - (float)raw) / (float)raw);
+        float temperatureK = 1.0 / ((1.0 / T0) + (1.0 / B) * log(R / R0));
+        return temperatureK - 273.15;
+    }
+    return 0;
 }

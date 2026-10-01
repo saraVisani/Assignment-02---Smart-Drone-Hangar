@@ -14,6 +14,7 @@ class ServoMotor : public IServoMotor {
         unsigned long lastStepTime = 0;
         unsigned int stepDelay = 20;
         int stepSize = 2;
+        int angleToPulse();
     public:
         void init(int pin = 0) override;
         inline bool isClosed() const override {

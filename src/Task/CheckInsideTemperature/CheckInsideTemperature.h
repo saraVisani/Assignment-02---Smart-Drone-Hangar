@@ -6,6 +6,9 @@
 class CheckInsideTemperature: public Task {
     private:
         unsigned long lastTempCheckTime;
+        unsigned long changeLine;
+        bool switchLine = false;
+        bool rewrite = false;
         void checkTemperature();
         void alarmProtocol();
         void checkForReset();

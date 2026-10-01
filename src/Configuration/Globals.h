@@ -4,10 +4,10 @@
 #include "ArduinoCompability.h"
 
 /* ---- PINS FOR HARDWARE ---- */
-#define L_ON 2          // pin
-#define L_ACT 3         // pin
+#define L_ON 4          // pin
+#define L_ACT 5         // pin
 #define L_ALARM 8       // pin
-#define B_RESET 5       // pin
+#define B_RESET 2       // pin
 #define P_S_PIR 6       // pin
 #define P_S_DDD_ECHO 13  // pin
 #define P_S_DDD_TRIG 12  // PIN
@@ -16,12 +16,12 @@
 
 /* ---- GLOBAL CONSTANT VARIABLE ---- */
 static const int TAKEOFF_DISTANCE = 35; // da aggiustare
-static const int LANDING_DISTANCE = 50;  // da aggiustare
+static const int LANDING_DISTANCE = 10;  // da aggiustare
 static const int TAKEOFF_TIME = 5000;    // da aggiustare
 static const int LANDING_TIME = 5000;    // da aggiustare
-static const int TEMP_THRESHOLD = 75;    // da aggiustare
-static const int PREALARM_TIME = 10000;  // da aggiustare
-static const int ALARM_TIME = 20000;     // da aggiustare
+static const int TEMP_THRESHOLD = 25;    // da aggiustare
+static const int PREALARM_TIME = 5000;  // da aggiustare
+static const int ALARM_TIME = 10000;     // da aggiustare
 
 /* ---- BUTTON INTERUPT ---- */
 extern volatile bool resetAllarm;
