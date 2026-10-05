@@ -14,6 +14,7 @@ private:
     Task *taskList[MAX_TASKS];
     Timer &timer;           // Timer passato come riferimento
     bool activateTaskLed;
+    DroneState lastDroneState;
 
     /**
      * The isSkipped method checks if a task should be skipped.

@@ -17,7 +17,7 @@ void LedInAction::blinking()
     }
     if(now-lastBlink >= 500){
         ledAct->toggle();
-        lastBlink = 0;
+        lastBlink = now;
     }
 }
 

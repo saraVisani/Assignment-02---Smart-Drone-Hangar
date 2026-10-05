@@ -42,6 +42,11 @@ typedef enum
     ALARM
 } SystemState;
 
+inline bool matchDroneState(DroneState t1, DroneState t2)
+{
+    return (t1 == t2);
+}
+
 /* ---- CLASS STATE ---- */
 class State
 {
@@ -55,6 +60,7 @@ private:
     static float singleDistance;
 
 public:
+    static DroneState getDroneState();
     static void setDroneState(DroneState newState);
     static void setSystemState(SystemState newState);
     static bool matchDroneState(DroneState state);

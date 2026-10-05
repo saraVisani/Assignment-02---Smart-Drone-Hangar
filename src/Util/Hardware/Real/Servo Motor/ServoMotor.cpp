@@ -36,15 +36,11 @@ void ServoMotor::close() {
 void ServoMotor::update() {
     if (angle == targetAngle) return;
 
-    unsigned long now = millis();
-    if (now - lastStepTime < stepDelay) return;
-    lastStepTime = now;
-
+    // L'avanzamento avviene ad ogni chiamata dello Scheduler (ogni 10 ms)
     if (angle < targetAngle) {
         angle += stepSize;
         if (angle > targetAngle) angle = targetAngle;
-    }
-    else {
+    } else {
         angle -= stepSize;
         if (angle < targetAngle) angle = targetAngle;
     }
