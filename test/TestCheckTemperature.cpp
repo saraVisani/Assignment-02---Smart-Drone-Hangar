@@ -100,15 +100,27 @@ void test_alarm_protocol_led_on() {
 
 void test_alarm_protocol_lcd_message() {
     mySetUpCheckTemperature();
+    State::setSystemState(OK);
 
     auto fakeLcd = (FakeLcd*)lcdDisplay;
+    auto fakeTemp = (FakeStemp*)sensorTemp;
 
-    State::setSystemState(ALARM);
+    fakeTemp->temp = TEMP_THRESHOLD + 10;
 
+    advanceMillis(1);
     temp->tick();
 
+    advanceMillis(PREALARM_TIME + 1);
+    temp->tick();
+
+    advanceMillis(ALARM_TIME - PREALARM_TIME);
+    temp->tick();
+
+    TEST_ASSERT_TRUE(State::matchSystemState(ALARM));
     TEST_ASSERT_EQUAL_STRING("ALARM TEMP", fakeLcd->getLine1().c_str());
     TEST_ASSERT_EQUAL_STRING("TOO HIGH", fakeLcd->getLine2().c_str());
+
+    myTearDownCheckTemperature();
 
     myTearDownCheckTemperature();
 }
@@ -142,7 +154,7 @@ void test_reset_from_alarm() {
 
     TEST_ASSERT_TRUE(State::matchSystemState(OK));
     TEST_ASSERT_FALSE(fakeLed->isOn());
-    TEST_ASSERT_TRUE(fakeLcd->isCleared());
+    TEST_ASSERT_EQUAL_STRING("DRONE INSIDE", fakeLcd->getLine1().c_str());
 
     myTearDownCheckTemperature();
 }

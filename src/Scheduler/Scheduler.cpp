@@ -21,7 +21,7 @@ bool Scheduler::activateTaskMovement(TaskType type)
     if((matchDroneState(lastDroneState, DroneState::LANDING) || matchDroneState(lastDroneState, DroneState::TAKEOFF)) && State::isNotDroneState(lastDroneState)){
         activateTaskLed = true;
     }
-    
+
     if(isNotTaskType(type, T_TAKEOFF) && isNotTaskType(type, T_LANDING)){
         return true;
     }
@@ -103,6 +103,7 @@ void Scheduler::schedule() {
 void Scheduler::reset() {
     nTasks = 0;               // nessun task schedulato
     activateTaskLed = false;   // reset flag LED
+    lastDroneState = DroneState::IDLE;    // reset stato drone
     for(int i = 0; i < MAX_TASKS; i++) {
         taskList[i] = nullptr; // rimuove riferimenti ai task
     }

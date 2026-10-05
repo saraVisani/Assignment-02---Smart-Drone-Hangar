@@ -31,7 +31,6 @@ public:
     void on() override {}
     void off() override {}
 
-    // 🔥 TEST HELPERS
     bool isCleared() const { return cleared; }
     String getLine1() const { return line1; }
     String getLine2() const { return line2; }
