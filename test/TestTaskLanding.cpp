@@ -1,17 +1,9 @@
 #include "./Util/test/TestInclude.h"
 #include <unity.h>
 
-// ============================================================
-// Test Task Landing
-// ============================================================
-
 static Landing* land = nullptr;
 static bool TTL = false; // Test Task Landing flag
 
-
-// ============================================================
-// SETUP / TEARDOWN
-// ============================================================
 
 void mySetUpLanding()
 {
@@ -33,9 +25,7 @@ void mySetUpLanding()
 
     // Reset dei fake
     ledOnInstance.reset();
-
     sensorPirInstance.setDroneDetected(false);
-
     sensorDddInstance.setDistance(LANDING_DISTANCE + 20);
     sensorDddInstance.resetSamples();
 

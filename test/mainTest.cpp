@@ -61,6 +61,42 @@ void test_landing_does_not_need_pir_after_start();
 void test_landing_ignores_unavailable_distance();
 void test_landing_distance_must_remain_below_threshold();
 
+void test_takeoff_initial_state_is_idle();
+void test_takeoff_does_not_start_from_idle();
+void test_takeoff_does_not_start_from_operating();
+void test_takeoff_starts_when_state_is_takeoff();
+void test_takeoff_opens_door();
+void test_takeoff_servo_moves_2_degrees_after_20ms();
+void test_takeoff_servo_reaches_180_degrees();
+void test_takeoff_servo_does_not_exceed_180_degrees();
+void test_takeoff_lcd_message();
+void test_takeoff_distance_below_threshold();
+void test_takeoff_distance_equal_threshold();
+void test_takeoff_distance_above_threshold();
+void test_takeoff_not_complete_before_time();
+void test_takeoff_complete_at_required_time();
+void test_takeoff_complete_after_required_time();
+void test_takeoff_timer_resets_if_drone_comes_back();
+void test_takeoff_timer_restarts_after_reset();
+void test_takeoff_completes_after_full_second_interval();
+void test_takeoff_updates_distance_state();
+void test_takeoff_ignores_unavailable_distance();
+void test_takeoff_resumes_after_ddd_becomes_available();
+void test_takeoff_first_four_ddd_reads_are_not_valid();
+void test_takeoff_fifth_ddd_read_is_valid();
+void test_takeoff_works_with_pir_low();
+void test_takeoff_works_with_pir_high();
+void test_takeoff_completion_turns_off_led();
+void test_takeoff_completion_prints_drone_out();
+void test_takeoff_completion_sets_operating();
+void test_takeoff_completion_starts_closing_door();
+void test_takeoff_completion_closes_door();
+void test_takeoff_does_not_complete_twice();
+void test_takeoff_can_start_again();
+void test_takeoff_new_cycle_requires_new_time();
+void test_takeoff_zero_distance_does_not_complete();
+void test_takeoff_large_distance_completes();
+void test_takeoff_distance_oscillation_resets_timer();
 
 void setUp() {}
 void tearDown() {}
@@ -132,6 +168,44 @@ int main() {
     RUN_TEST(test_landing_does_not_need_pir_after_start);
     RUN_TEST(test_landing_ignores_unavailable_distance);
     RUN_TEST(test_landing_distance_must_remain_below_threshold);
+
+    //takingOff fase testing
+    RUN_TEST(test_takeoff_initial_state_is_idle);
+    RUN_TEST(test_takeoff_does_not_start_from_idle);
+    RUN_TEST(test_takeoff_does_not_start_from_operating);
+    RUN_TEST(test_takeoff_starts_when_state_is_takeoff);
+    RUN_TEST(test_takeoff_opens_door);
+    RUN_TEST(test_takeoff_servo_moves_2_degrees_after_20ms);
+    RUN_TEST(test_takeoff_servo_reaches_180_degrees);
+    RUN_TEST(test_takeoff_servo_does_not_exceed_180_degrees);
+    RUN_TEST(test_takeoff_lcd_message);
+    RUN_TEST(test_takeoff_distance_below_threshold);
+    RUN_TEST(test_takeoff_distance_equal_threshold);
+    RUN_TEST(test_takeoff_distance_above_threshold);
+    RUN_TEST(test_takeoff_not_complete_before_time);
+    RUN_TEST(test_takeoff_complete_at_required_time);
+    RUN_TEST(test_takeoff_complete_after_required_time);
+    RUN_TEST(test_takeoff_timer_resets_if_drone_comes_back);
+    RUN_TEST(test_takeoff_timer_restarts_after_reset);
+    RUN_TEST(test_takeoff_completes_after_full_second_interval);
+    RUN_TEST(test_takeoff_updates_distance_state);
+    RUN_TEST(test_takeoff_ignores_unavailable_distance);
+    RUN_TEST(test_takeoff_resumes_after_ddd_becomes_available);
+    RUN_TEST(test_takeoff_first_four_ddd_reads_are_not_valid);
+    RUN_TEST(test_takeoff_fifth_ddd_read_is_valid);
+    RUN_TEST(test_takeoff_works_with_pir_low);
+    RUN_TEST(test_takeoff_works_with_pir_high);
+    RUN_TEST(test_takeoff_completion_turns_off_led);
+    RUN_TEST(test_takeoff_completion_prints_drone_out);
+    RUN_TEST(test_takeoff_completion_sets_operating);
+    RUN_TEST(test_takeoff_completion_starts_closing_door);
+    RUN_TEST(test_takeoff_completion_closes_door);
+    RUN_TEST(test_takeoff_does_not_complete_twice);
+    RUN_TEST(test_takeoff_can_start_again);
+    RUN_TEST(test_takeoff_new_cycle_requires_new_time);
+    RUN_TEST(test_takeoff_zero_distance_does_not_complete);
+    RUN_TEST(test_takeoff_large_distance_completes);
+    RUN_TEST(test_takeoff_distance_oscillation_resets_timer);
 
     return UNITY_END();
 }
