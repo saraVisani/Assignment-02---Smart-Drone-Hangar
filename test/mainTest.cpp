@@ -39,6 +39,29 @@ void test_reset_from_alarm();
 void test_prealarm_back_to_ok_when_temp_normal();
 void test_alarm_not_reentered_if_already_alarm();
 
+void test_landing_no_drone_detected();
+void test_landing_drone_detected();
+void test_landing_lcd_message();
+void test_landing_servo_opens();
+void test_landing_servo_opens_completely();
+void test_landing_distance_above_threshold();
+void test_landing_distance_equal_threshold();
+void test_landing_distance_below_threshold();
+void test_landing_not_complete_before_time();
+void test_landing_complete_at_required_time();
+void test_landing_timer_resets_if_drone_moves_away();
+void test_landing_updates_distance_state();
+void test_landing_complete_turns_on_led();
+void test_landing_complete_lcd();
+void test_landing_complete_sets_idle();
+void test_landing_complete_starts_closing_door();
+void test_landing_complete_closes_door();
+void test_landing_can_start_again_after_completion();
+void test_landing_does_not_need_pir_after_start();
+void test_landing_ignores_unavailable_distance();
+void test_landing_distance_must_remain_below_threshold();
+
+
 void setUp() {}
 void tearDown() {}
 
@@ -86,6 +109,29 @@ int main() {
     RUN_TEST(test_reset_from_alarm);
     RUN_TEST(test_prealarm_back_to_ok_when_temp_normal);
     RUN_TEST(test_alarm_not_reentered_if_already_alarm);
+
+    // Landing fase tests
+    RUN_TEST(test_landing_no_drone_detected);
+    RUN_TEST(test_landing_drone_detected);
+    RUN_TEST(test_landing_lcd_message);
+    RUN_TEST(test_landing_servo_opens);
+    RUN_TEST(test_landing_servo_opens_completely);
+    RUN_TEST(test_landing_distance_above_threshold);
+    RUN_TEST(test_landing_distance_equal_threshold);
+    RUN_TEST(test_landing_distance_below_threshold);
+    RUN_TEST(test_landing_not_complete_before_time);
+    RUN_TEST(test_landing_complete_at_required_time);
+    RUN_TEST(test_landing_timer_resets_if_drone_moves_away);
+    RUN_TEST(test_landing_updates_distance_state);
+    RUN_TEST(test_landing_complete_turns_on_led);
+    RUN_TEST(test_landing_complete_lcd);
+    RUN_TEST(test_landing_complete_sets_idle);
+    RUN_TEST(test_landing_complete_starts_closing_door);
+    RUN_TEST(test_landing_complete_closes_door);
+    RUN_TEST(test_landing_can_start_again_after_completion);
+    RUN_TEST(test_landing_does_not_need_pir_after_start);
+    RUN_TEST(test_landing_ignores_unavailable_distance);
+    RUN_TEST(test_landing_distance_must_remain_below_threshold);
 
     return UNITY_END();
 }
