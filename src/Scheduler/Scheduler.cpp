@@ -18,6 +18,10 @@ bool Scheduler::activateTempTask(TaskType type) {
 
 bool Scheduler::activateTaskMovement(TaskType type)
 {
+    if((matchDroneState(lastDroneState, DroneState::LANDING) || matchDroneState(lastDroneState, DroneState::TAKEOFF)) && State::isNotDroneState(lastDroneState)){
+        activateTaskLed = true;
+    }
+    
     if(isNotTaskType(type, T_TAKEOFF) && isNotTaskType(type, T_LANDING)){
         return true;
     }
@@ -93,6 +97,7 @@ void Scheduler::schedule() {
             taskList[i]->tick();
         }
     }
+    lastDroneState = State::getDroneState();
 }
 
 void Scheduler::reset() {

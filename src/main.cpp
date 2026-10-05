@@ -6,7 +6,7 @@ Scheduler scheduler(timer);
 void setup() {
   Serial.begin(9600);
   hw->initAllHardware();
-  scheduler.init(200);
+  scheduler.init(10);
   Task* ioTask = new InputOutput();
   ioTask->init(20);
   scheduler.addTask(ioTask);
@@ -20,7 +20,7 @@ void setup() {
   landing->init(40);
   scheduler.addTask(landing);
   Task* ledTask = new LedInAction();
-  ledTask->init(10);
+  ledTask->init(500);
   scheduler.addTask(ledTask);
   Task* doorTask = new Door();
   doorTask->init(10);

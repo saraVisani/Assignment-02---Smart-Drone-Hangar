@@ -2,7 +2,6 @@
 
 volatile bool resetAllarm = false;
 
-
 bool matchHardwareType(HardwareType t1, String t2) {
     HardwareType ht;
     if(t2 == "LED") ht = LED;
@@ -51,6 +50,7 @@ float State::temperatureInside = 0.0f;
 float State::distanceFromHangar = 0.0f;
 float State::singleDistance = 0.0f;
 
+DroneState State::getDroneState() { return droneState; }
 void State::setDroneState(DroneState newState) { droneState = newState; }
 void State::setSystemState(SystemState newState) { systemState = newState; }
 bool State::matchDroneState(DroneState state) { return droneState == state; }
