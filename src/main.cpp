@@ -6,7 +6,7 @@ Scheduler scheduler(timer);
 void setup() {
   Serial.begin(9600);
   hw->initAllHardware();
-  scheduler.init(10);
+  scheduler.init(20);
   Task* ioTask = new InputOutput();
   ioTask->init(20);
   scheduler.addTask(ioTask);
@@ -23,7 +23,7 @@ void setup() {
   ledTask->init(500);
   scheduler.addTask(ledTask);
   Task* doorTask = new Door();
-  doorTask->init(10);
+  doorTask->init(20);
   scheduler.addTask(doorTask);
   ledOn->turnOn();
   lcdDisplay->activateClearFlag();
