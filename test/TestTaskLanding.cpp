@@ -808,7 +808,7 @@ void test_landing_distance_must_remain_below_threshold()
 // UNITY
 // ============================================================
 
-void setup()
+/*void setup()
 {
 
     UNITY_BEGIN();
@@ -851,4 +851,4 @@ void setup()
 
 void loop()
 {
-}
+}*/

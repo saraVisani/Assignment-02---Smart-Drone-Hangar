@@ -819,6 +819,6 @@ void test_takeoff_distance_oscillation_resets_timer()
 
 
 
-void loop()
+/*void loop()
 {
-}
+}*/
