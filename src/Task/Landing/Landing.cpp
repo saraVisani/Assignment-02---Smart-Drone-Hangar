@@ -1,21 +1,13 @@
 #include "Landing.h"
 
-Landing::Landing()
-    : droneLandStartTime(0),
-      state (LandingState::LANDING),
-      openHangarDoor(false)
-{}
-
 void Landing::landing()
 {
     if(sensorPir->isDroneDetected()){
-        if(!openHangarDoor){
-            servoMotor->open();
-            hw->updateOpeningDoor();
+        if(!servoMotor->isOpened()){
+            hw->openDoor();
             lcdDisplay->clear();
             lcdDisplay->printLine("LANDING");
             lcdDisplay->activateClearFlag();
-            openHangarDoor = true;
             state = LandingState::WAIT_DRONE_LAND;
         }
     }
@@ -23,7 +15,7 @@ void Landing::landing()
 
 void Landing::monitorDroneLanding()
 {
-    if(state != LandingState::WAIT_DRONE_LAND || !openHangarDoor) return;
+    if(!servoMotor->isOpened()) return;
     float distance;
     if(sensorDdd->readDistanceAvarage(distance)){
         State::setDistanceToGround(distance);
@@ -42,11 +34,10 @@ void Landing::monitorDroneLanding()
 void Landing::completeLanding()
 {
     ledOn->turnOn();
-    servoMotor->close();
-    hw->updateClosingDoor();
+    hw->closeDoor();
+    lcdDisplay->clear();
     lcdDisplay->activateClearFlag();
     lcdDisplay->printLine("DRONE INSIDE");
-    openHangarDoor = false;
     droneLandStartTime = 0;
     state = LandingState::LANDING;
     State::setDroneState(DroneState::IDLE);
@@ -54,11 +45,9 @@ void Landing::completeLanding()
 
 void Landing::tick()
 {
-    servoMotor->update();
     switch (state) {
         case LandingState::LANDING:
             landing();
-
             break;
         case LandingState::WAIT_DRONE_LAND:
             monitorDroneLanding();

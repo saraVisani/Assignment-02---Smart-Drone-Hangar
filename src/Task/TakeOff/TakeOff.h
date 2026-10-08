@@ -10,16 +10,13 @@ enum class TakeOffState {
 
 class TakeOff: public Task{
     private:
-    unsigned long droneExitStartTime;
-    TakeOffState state;
-    bool openHangarDoor;
+    unsigned long droneExitStartTime = 0;
+    TakeOffState state = TakeOffState::TAKING_OFF;
     void takingOff();
     void monitorDroneExit();
     void completeTakeOff();
 
     public:
-    TakeOff();
-
     void receiveCommand();
     void tick() override;
     inline TaskType getType() override {

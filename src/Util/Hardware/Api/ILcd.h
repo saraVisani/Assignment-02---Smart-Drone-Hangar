@@ -12,6 +12,7 @@ class ILcd : public Component {
         virtual void printLine(const String& message, int line = 0) = 0;
         virtual void print(const char* message0, const char* message1) = 0;
         virtual void print(const String& message0, const String& message1) = 0;
+        virtual String getLine(int line = 0) = 0;
         virtual void clear() = 0;
         virtual void clearLine(int line = 0) = 0;
         virtual void on() = 0;

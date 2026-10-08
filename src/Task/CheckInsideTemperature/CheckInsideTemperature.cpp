@@ -32,7 +32,10 @@ void CheckInsideTemperature::checkTemperature() {
         lcdDisplay->print("ALARM TEMP", "TOO HIGH");
         lcdDisplay->activateClearFlag();
         this->switchLine = false;
-        hw->closeDoor();
+        if(State::matchDroneState(DroneState::OPERATING) || State::matchDroneState(DroneState::IDLE))
+        {
+            hw->closeDoor();
+        }
     }
     else if (elapsed >= PREALARM_TIME) {
         State::setSystemState(PREALARM);
@@ -64,7 +67,7 @@ void CheckInsideTemperature::checkForReset() {
 }
 
 void CheckInsideTemperature::alarmProtocol(){
-    if(!(servoMotor->isClosing() || servoMotor->isClosed()) &&
+    if(lcdDisplay->getLine(0) != "ALARM TEMP" &&
         (State::matchDroneState(DroneState::IDLE) || State::matchDroneState(DroneState::OPERATING))){
         hw->closeDoor();
         hw->updateClosingDoor();

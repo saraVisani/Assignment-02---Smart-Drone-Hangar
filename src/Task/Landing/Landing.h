@@ -10,16 +10,14 @@ enum class LandingState {
 
 class Landing: public Task{
     private:
-    unsigned long droneLandStartTime;
-    LandingState state;
+    unsigned long droneLandStartTime = 0;
+    LandingState state = LandingState::LANDING;
     bool openHangarDoor;
     void landing();
     void monitorDroneLanding();
     void completeLanding();
 
     public:
-    Landing();
-
     inline TaskType getType() override {
         return TaskType::T_LANDING;
     };

@@ -5,7 +5,7 @@
 
 class CheckInsideTemperature: public Task {
     private:
-        unsigned long lastTempCheckTime;
+        unsigned long lastTempCheckTime = 0;
         unsigned long changeLine;
         bool switchLine = false;
         bool rewrite = false;
@@ -17,10 +17,6 @@ class CheckInsideTemperature: public Task {
             return T_CHECK_INSIDE_TEMPERATURE;
         }
         void tick() override;
-        void init(int period) override {
-            Task::init(period);
-            lastTempCheckTime = 0;
-        }
 };
 
 #endif

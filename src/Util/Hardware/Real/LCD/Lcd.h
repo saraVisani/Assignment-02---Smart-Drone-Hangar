@@ -8,6 +8,7 @@ class Lcd : public ILcd {
     private:
         LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
         boolean cleared = false, p_1 = false, p_2 = false;
+        String line1 = "", line2 = "";
     public:
         void init(int pin = 0) override;
         void printLine(const char* message, int line = 0) override;
@@ -22,6 +23,7 @@ class Lcd : public ILcd {
             printLine(message0.c_str(), 0);
             printLine(message1.c_str(), 1);
         }
+        String getLine(int line = 0) override;
         void clear() override;
         void clearLine(int line = 0) override;
         inline void on()  override {

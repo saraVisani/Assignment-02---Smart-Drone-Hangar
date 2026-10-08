@@ -48,13 +48,13 @@ void RealHardware::initAllHardware() {
 }
 
 void RealHardware::openDoor() {
-    if(!servoMotor->isOpened() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
+    if(!servoMotor->isOpened() && !servoMotor->isOpening()) {
         servoMotor->open();
     }
 }
 
 void RealHardware::closeDoor() {
-    if(!servoMotor->isClosed() && (State::matchDroneState(IDLE) || State::matchDroneState(OPERATING))) {
+    if(!servoMotor->isClosed() && !servoMotor->isClosing()) {
         servoMotor->close();
     }
 }

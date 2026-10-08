@@ -1,27 +1,19 @@
 #include "TakeOff.h"
 
-TakeOff::TakeOff()
-    : droneExitStartTime(0),
-      state(TakeOffState::TAKING_OFF),
-      openHangarDoor(false)
-{}
-
 void TakeOff::takingOff()
 {
-    if(!openHangarDoor){
-        servoMotor->open();
-        hw->updateOpeningDoor();
+    if(servoMotor->isClosed()){
+        hw->openDoor();
         lcdDisplay->clear();
         lcdDisplay->activateClearFlag();
         lcdDisplay->printLine("TAKE OFF");
-        openHangarDoor = true;
         state = TakeOffState::WAIT_DRONE_EXIT;
     }
 }
 
 void TakeOff::monitorDroneExit()
 {
-    if(state != TakeOffState::WAIT_DRONE_EXIT || !openHangarDoor) return;
+    if(!servoMotor->isOpened()) return;
     float distance;
     if(sensorDdd->readDistanceAvarage(distance)){
         State::setDistanceFromHangar(distance);
@@ -40,11 +32,9 @@ void TakeOff::monitorDroneExit()
 void TakeOff::completeTakeOff()
 {
     ledOn->turnOff();
-    servoMotor->close();
-    hw->updateClosingDoor();
-    lcdDisplay->activateClearFlag();
+    hw->closeDoor();
+    lcdDisplay->clear();
     lcdDisplay->printLine("DRONE OUT");
-    openHangarDoor = false;
     droneExitStartTime = 0;
     state = TakeOffState::TAKING_OFF;
     State::setDroneState(DroneState::OPERATING);
@@ -53,7 +43,6 @@ void TakeOff::completeTakeOff()
 
 void TakeOff::tick()
 {
-    servoMotor->update();
     switch(state) {
         case TakeOffState::TAKING_OFF:
             takingOff();

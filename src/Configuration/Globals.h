@@ -15,11 +15,11 @@
 #define P_SERVOMOTOR 10 // pin
 
 /* ---- GLOBAL CONSTANT VARIABLE ---- */
-static const int TAKEOFF_DISTANCE = 35; // da aggiustare
-static const int LANDING_DISTANCE = 10;  // da aggiustare
+static const int TAKEOFF_DISTANCE = 15; // da aggiustare
+static const int LANDING_DISTANCE = 5;  // da aggiustare
 static const int TAKEOFF_TIME = 5000;    // da aggiustare
 static const int LANDING_TIME = 5000;    // da aggiustare
-static const int TEMP_THRESHOLD = 29;    // da aggiustare
+static const int TEMP_THRESHOLD = 26;    // da aggiustare
 static const int PREALARM_TIME = 5000;  // da aggiustare
 static const int ALARM_TIME = 10000;     // da aggiustare
 

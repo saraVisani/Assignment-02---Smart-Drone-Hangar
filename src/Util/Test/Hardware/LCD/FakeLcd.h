@@ -20,6 +20,15 @@ public:
     void print(const String& message0, const String& message1) override {
         print(message0.c_str(), message1.c_str());
     }
+    String getLine(int line = 0) override {
+        if (line == 0) {
+            return line1;
+        } else if (line == 1) {
+            return line2;
+        } else {
+            return "";
+        }
+    }
 
     void clear() override;
     void clearLine(int line = 0) override;

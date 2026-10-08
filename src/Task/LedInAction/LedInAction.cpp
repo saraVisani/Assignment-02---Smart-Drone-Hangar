@@ -3,22 +3,13 @@
 void LedInAction::checkChange()
 {
     if(State::isNotDroneState(LANDING) && State::isNotDroneState(TAKEOFF)){
-       lastBlink = 0;
-       ledAct->turnOff();
+        ledAct->turnOff();
     }
 }
 
 void LedInAction::blinking()
 {
-    unsigned long now = millis();
-    if(lastBlink == 0){
-        lastBlink = now;
-        ledAct->turnOn();
-    }
-    if(now-lastBlink >= 500){
-        ledAct->toggle();
-        lastBlink = now;
-    }
+    ledAct->toggle();
 }
 
 void LedInAction::tick()
